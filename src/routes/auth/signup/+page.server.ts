@@ -47,6 +47,7 @@ export const actions: Actions = {
                     email: email.toString(),
                     password: hashedPassword,
                     username: username.toString(),
+                    username_case_insensitive: username.toString().toLowerCase(),
                     paidUser: false,
                 }
             })

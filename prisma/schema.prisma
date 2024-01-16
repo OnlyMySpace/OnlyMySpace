@@ -14,6 +14,7 @@ datasource db {
 model User {
   id Int @id @unique @default(autoincrement())
   username String @unique
+  username_case_insensitive String @unique
   password String
   email String
   profile UserProfile?

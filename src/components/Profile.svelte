@@ -54,8 +54,6 @@
         }
 	};
 
-	console.log(JSON.stringify(exampleProfile, null, 0));
-
 	export let profile: UserProfile = exampleProfile;
 
 	let bgStyle: string;
