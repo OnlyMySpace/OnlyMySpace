@@ -42,4 +42,6 @@ interface UserProfile {
         songCover: string;
         songArtist: string;
     } | null;
+    pronnouns: string | null; // This is an optional field so there are no breaking changes
+    /* @NOTE: For future me: From now on only add new fields if you know what you're doing and make it optional for backwards compatibility (its json not database you cant migrate it) */
 }

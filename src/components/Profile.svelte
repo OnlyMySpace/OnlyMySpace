@@ -20,6 +20,7 @@
 	let exampleProfile: UserProfile = {
 		font: fontA,
 		id: 0,
+		pronnouns: 'Any pronnouns',
 		pfp: {
 			border_color: '#9CA3DB',
 			no_border: false,
@@ -54,6 +55,7 @@
         }
 	};
 
+
 	export let profile: UserProfile = exampleProfile;
 
 	let bgStyle: string;
@@ -69,7 +71,15 @@
 			await new FontFace(profile.font.font_name, `url(${profile.font.font_url})`).load();
 		}
 	})
-
+	function shadeHexColor(color: string, percent: number): string {
+    let f = parseInt(color.slice(1), 16),
+        t = percent < 0 ? 0 : 255,
+        p = percent < 0 ? percent * -1 : percent,
+        R = f >> 16,
+        G = (f >> 8) & 0x00FF,
+        B = f & 0x0000FF;
+    return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
+}
 </script>
 
 <svelte:head>
@@ -97,7 +107,7 @@
 				class="w-32 h-32 top-3 rounded-full" class:border-4={!profile.pfp.no_border}
 			/>
 			<h1 class="text-5xl font-bold text-center sm:pb-4 tooltip" data-tip={'ID ' + profile.id}>
-				{profile.uname}
+				{profile.uname}<span style="color: {profile.textColor}; opacity:0.65">{profile.pronnouns ? " - " + profile.pronnouns : ''}</span>
 			</h1>
 		</div>
 		<div class="flex flex-col justify-center items-center">
