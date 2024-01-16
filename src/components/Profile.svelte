@@ -4,7 +4,7 @@
 	export let isExample: boolean = false;
 
 	let fontA: FontOptions = {
-			font_alt: 'sans-serif',
+			font_alt: 'monospace',
 			font_name: 'Minecraft',
 			font_url: '/fonts/Minecraft.ttf',
 			is_google_font: false
@@ -17,8 +17,8 @@
 		is_google_font: true
 	}
 
-	let exampleUProf: UserProfile = {
-		font: fontB,
+	let exampleProfile: UserProfile = {
+		font: fontA,
 		id: 0,
 		pfp: {
 			border_color: '#9CA3DB',
@@ -54,17 +54,21 @@
         }
 	};
 
+	console.log(JSON.stringify(exampleProfile, null, 0));
+
+	export let profile: UserProfile = exampleProfile;
+
 	let bgStyle: string;
-	if (exampleUProf.backgroundType == 'image') {
-		bgStyle = `background-image: url('${exampleUProf.background}')`;
+	if (profile.backgroundType == 'image') {
+		bgStyle = `background-image: url('${profile.background}')`;
 	} else {
-		bgStyle = `background-color: ${exampleUProf.background}`;
+		bgStyle = `background-color: ${profile.background}`;
 	}
 
 	onMount(async () => {
 		// Register a custom font face for that font if it doesn't exist
-		if (!exampleUProf.font.is_google_font) {
-			const fontFace = await new FontFace(exampleUProf.font.font_name, `url(${exampleUProf.font.font_url})`).load();
+		if (!profile.font.is_google_font) {
+			await new FontFace(profile.font.font_name, `url(${profile.font.font_url})`).load();
 		}
 	})
 
@@ -72,16 +76,16 @@
 
 <svelte:head>
 	{#if !isExample}
-	<title>{exampleUProf.uname}</title>
+	<title>{profile.uname}</title>
 	{/if}
-	{#if exampleUProf.font.is_google_font}
+	{#if profile.font.is_google_font}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-		<link href="https://fonts.googleapis.com/css2?family={exampleUProf.font.font_name.replaceAll(' ', '+')}&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family={profile.font.font_name.replaceAll(' ', '+')}&display=swap" rel="stylesheet">
 	{/if}
 </svelte:head>
 <div
-	style={`font-family: ${exampleUProf.font.font_name}, ${exampleUProf.font.font_alt}; color: ${exampleUProf.textColor};${bgStyle}`}
+	style={`font-family: ${profile.font.font_name}, ${profile.font.font_alt}; color: ${profile.textColor};${bgStyle}`}
 	class="w-screen h-screen bg-no-repeat bg-center bg-fixed bg-cover flex items-center justify-center overflow-hidden"
 	>
 	<div
@@ -89,19 +93,19 @@
     >
 		<div class="flex flex-col justify-center items-center">
 			<img
-				style={`border-color: ${exampleUProf.pfp.border_color};`}
-				src={exampleUProf.pfp.url}
+				style={`border-color: ${profile.pfp.border_color};`}
+				src={profile.pfp.url}
 				alt="Profile"
-				class="w-32 h-32 top-3 rounded-full" class:border-4={!exampleUProf.pfp.no_border}
+				class="w-32 h-32 top-3 rounded-full" class:border-4={!profile.pfp.no_border}
 			/>
-			<h1 class="text-5xl font-bold text-center sm:pb-4 tooltip" data-tip={'ID ' + exampleUProf.id}>
-				{exampleUProf.uname}
+			<h1 class="text-5xl font-bold text-center sm:pb-4 tooltip" data-tip={'ID ' + profile.id}>
+				{profile.uname}
 			</h1>
 		</div>
 		<div class="flex flex-col justify-center items-center">
             <div class="flex flex-col justify-center items-center">            
                 <div class="flex flex-row justify-center items-center gap-4 w-fit backdrop-blur-sm bg-base-100 bg-opacity-20 rounded-lg h-8 px-2 lg:mb-4">
-                    {#each exampleUProf.socials as social}
+                    {#each profile.socials as social}
                         {#if social.type == 'handle'}
                             <div class="tooltip" data-tip={social.value}>
                                 <img class="w-6 h-6" src={social.icon} alt={social.name} />
@@ -115,12 +119,12 @@
                 </div>
             </div>
 			<p class="text-2xl font-bold text-center hover">
-				{exampleUProf.bio}
+				{profile.bio}
 			</p>
 		</div>
 		<div class="flex flex-col justify-center items-center w-[1fr] h-[1fr]">
-            {#if exampleUProf.musicPlayer}
-			<MusicPlayer {...exampleUProf.musicPlayer} />
+            {#if profile.musicPlayer}
+			<MusicPlayer {...profile.musicPlayer} />
             {/if}
 		</div>
 	</div>

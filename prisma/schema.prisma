@@ -23,4 +23,5 @@ model User {
 model UserProfile {
   id Int @id @unique @default(autoincrement())
   user User @relation(fields: [id], references: [id])
+  profile Json @default("{}")
 }
