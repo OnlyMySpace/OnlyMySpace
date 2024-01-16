@@ -6,7 +6,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
     const profile = await prisma.userProfile.findFirst({
         where: {
             user: {
-                username: params.username
+                username_case_insensitive: params.username.toLowerCase()
             }
         }
     })

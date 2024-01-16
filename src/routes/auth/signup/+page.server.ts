@@ -70,7 +70,7 @@ export const actions: Actions = {
                         })
                     }
                     return fail(400,{
-                        message: "User already exists",
+                        message: "Username is already taken",
                         success: false
                     })
                 }
