@@ -25,11 +25,6 @@
 		action=""
 		method="post"
 		use:enhance={({ formElement, formData, action, cancel, submitter }) => {
-			// `formElement` is this `<form>` element
-			// `formData` is its `FormData` object that's about to be submitted
-			// `action` is the URL to which the form is posted
-			// calling `cancel()` will prevent the submission
-			// `submitter` is the `HTMLElement` that caused the form to be submitted
 			return async ({ result, update }) => {
 				if (result.type === 'success') {
 					goto('/editor');
@@ -41,13 +36,7 @@
 			};
 		}}
 	>
-		<h1 class="text-3xl font-bold text-center py-4">Make your own Space!</h1>
-		<input
-			type="text"
-			placeholder="Username"
-			name="username"
-			class="input w-full max-w-xs my-4 border-2 border-secondary"
-		/>
+		<h1 class="text-3xl font-bold text-center py-4">Access your Space!</h1>
 		<input
 			type="email"
 			name="email"
@@ -62,12 +51,6 @@
 			class="input w-full max-w-xs border-2 border-secondary"
 			id="password"
 		/>
-		<button type="submit" class="btn-primary btn my-4 rounded-md">Sign up</button>
-		<!-- <div class="divider divider-neutral w-10/12 self-center">OR</div>
-        <button on:click={() => discordAuth()} class="btn-primary btn my-4 rounded-md">
-        <img src="/socials/discord.svg" alt="Discord logo" class="w-6 h-6"/>
-        Sign up with Discord
-        </button>
-        -->
+		<button type="submit" class="btn-primary btn my-4 rounded-md">Log in</button>
 	</form>
 </div>

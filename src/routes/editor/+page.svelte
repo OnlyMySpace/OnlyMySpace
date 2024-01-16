@@ -1,5 +1,3 @@
-<script>
-    import Profile from '../../components/Profile.svelte';
-    
+<script lang="ts">
+
 </script>
-<Profile/>
