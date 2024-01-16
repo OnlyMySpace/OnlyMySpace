@@ -21,7 +21,7 @@
 		{/if}
 	</div>
 	<form
-		class="border-2 border-primary rounded-md w-1/5 flex flex-col justify-center items-center"
+		class="border-2 border-primary rounded-md w-1/5 flex flex-col justify-center items-center sm:w-full"
 		action=""
 		method="post"
 		use:enhance={({ formElement, formData, action, cancel, submitter }) => {

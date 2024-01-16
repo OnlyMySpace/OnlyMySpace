@@ -48,10 +48,10 @@
 		bio: 'A professional idiot and (not so professional) WebDev',
 		widget: null,
         musicPlayer: {
-            songName: "Bőrönd",
-            songArtist: "Carson Coma",
-			songCover: "https://lastfm.freetls.fastly.net/i/u/770x0/9adae3aacd0252d80e43dd4131d37ae8.jpg#9adae3aacd0252d80e43dd4131d37ae8",
-			songUrl: "https://cdn.discordapp.com/attachments/1145660131711926282/1196167696698581113/y2mate.is_-_Carson_Coma_Borond-7X8pdvYDyBM-192k-1696941727.mp3?ex=65b6a4fa&is=65a42ffa&hm=4ecd88949ee1b15ac53df738c123dc074b6a4dce623d0c66f32cc459c8d01fd6&"
+            songName: "Amerika",
+            songArtist: "Rammstein",
+			songCover: "https://lastfm.freetls.fastly.net/i/u/770x0/36188c60827943a38870427b07a892eb.jpg#36188c60827943a38870427b07a892eb",
+			songUrl: "https://cdn.discordapp.com/attachments/1196199160412639244/1196910955376951306/Rammstein_-_Amerika_Official_Video_Rr8ljRgcJNM.opus"
         }
 	};
 
