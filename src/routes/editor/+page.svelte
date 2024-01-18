@@ -3,6 +3,10 @@
 	import type { PageData } from './$types';
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import { fade } from 'svelte/transition';
+
+	let pfpPreviewShown = false;
+	let pfpPreview: HTMLImageElement;
+
 	type SocialMap = {
 		[key: string]: {
 			type: string;
@@ -52,6 +56,17 @@
 		}
 	};
 
+	function updateProfile() {
+		if (!profile) return;
+		fetch(window.location.href, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(profile)
+		})
+	}
+
 	export let data: PageData;
 
 	function handleSocialsChange(ev: Event, social: Social) {
@@ -70,10 +85,23 @@
 		});
 		console.log(profile.socials);
 	}
+
+	function handleProfilePicChange(event: Event) {
+		let reader = new FileReader();
+		reader.onload = () => {
+			if (!profile || !reader.result) return;
+			pfpPreviewShown = true;
+			pfpPreview.setAttribute('src', reader.result as string);
+		};
+		// @ts-ignore
+		if (!profile || !event.target || !event.target.files) return;
+		// @ts-ignore
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
 	let profile: UserProfile;
 	if (!data.profile) profile = exampleProfile;
 	else profile = data.profile;
-
 </script>
 
 {#if profile}
@@ -82,6 +110,58 @@
 			Make your profile your <span class="text-primary underline underline-offset-4">own</span>
 		</h1>
 		<div class="flex flex-col gap-4 justify-center items-center">
+			<div class="flex flex-col justify-center items-center gap-2">
+				<h1 class="text-2xl font-bold pb-4">The important stuff!</h1>
+				<!-- This part is for pfp, username, pronnouns and bio -->
+				<input
+					type="text"
+					class="input w-full max-w-xs"
+					placeholder="Username"
+					bind:value={profile.uname}
+				/>
+				<textarea
+					class="textarea w-full max-w-xs"
+					placeholder="Bio"
+					rows="3"
+					bind:value={profile.bio}
+				></textarea>
+				<input
+					type="text"
+					class="input w-full max-w-xs"
+					placeholder="Pronouns"
+					bind:value={profile.pronnouns}
+				/>
+				<input
+					type="file"
+					id="profilePic"
+					name="profilePic"
+					class="input w-full max-w-xs file-input file-input-bordered"
+					accept="image/*"
+					on:change={(e) => handleProfilePicChange(e)}
+				/>
+				<label for="checkbox" class="label cursor-pointer flex gap-4"
+					>No border <input
+						type="checkbox"
+						class="toggle toggle-primary"
+						bind:checked={profile.pfp.no_border}
+					/>
+				</label>
+				{#if !profile.pfp.no_border}
+					<div class="flex flex-col justify-center items-center">
+						<h1 class="text-2xl font-bold pb-4">Border Color</h1>
+						<ColorPicker label="Border Color" bind:hex={profile.pfp.border_color} />
+					</div>
+				{/if}
+				<h1 class="text-2xl font-bold pb-4">Preview</h1>
+				<img
+					class:hidden={!pfpPreviewShown}
+					class="h-32 w-32 rounded-full object-cover object-center"
+					style={profile.pfp.no_border ? '' : `border-color: ${profile.pfp.border_color}`}
+					class:border-4={!profile.pfp.no_border}
+					alt="Profile preview"
+					bind:this={pfpPreview}
+				/>
+			</div>
 			<div class="flex flex-col justify-center items-center">
 				<h1 class="text-2xl font-bold pb-4">Text Color</h1>
 				<ColorPicker label="Text Color" bind:hex={profile.textColor} />
@@ -154,7 +234,7 @@
 				<button
 					class="btn btn-primary"
 					on:click={() => {
-						profile.socials.push({ name: '', value: '', icon: '' ,type: 'handle'});
+						profile.socials.push({ name: '', value: '', icon: '', type: 'handle' });
 						profile.socials = profile.socials;
 					}}>Add Social media</button
 				>
@@ -167,8 +247,9 @@
 							<select
 								class="select select-bordered w-full max-w-xs"
 								on:change={(ev) => handleSocialsChange(ev, social)}
-								value={social.name}
+								value={social.name.charAt(0).toUpperCase() + social.name.slice(1)}
 							>
+								<!-- Added capitalization for the value above to be backwards compatible -->
 								<option disabled selected>Social media name</option>
 								<option>Discord</option>
 								<option>Twitter (X)</option>
@@ -198,6 +279,95 @@
 					{/each}
 				</div>
 			</div>
+			<div class="flex flex-col justify-center items-center gap-2">
+				<!-- Music player toggle -->
+				<h1 class="text-2xl font-bold pb-4">Music Player</h1>
+				<div
+					class="flex flex-row justify-center items-center gap-2"
+					transition:fade={{ duration: 200 }}
+				>
+					<label for="">Enable music player</label>
+					<input
+						type="checkbox"
+						class="toggle toggle-primary"
+						checked={profile.musicPlayer != null}
+						on:change={() => {
+							if (profile.musicPlayer == null) {
+								profile.musicPlayer = { songName: '', songArtist: '', songUrl: '', songCover: '' };
+							} else {
+								profile.musicPlayer = null;
+							}
+						}}
+					/>
+				</div>
+				{#if profile.musicPlayer != null}
+					<div class="flex flex-col justify-center items-center gap-2">
+						<div
+							class="flex flex-row justify-center items-center gap-2"
+							transition:fade={{ duration: 200 }}
+						>
+							<label for="">Name</label>
+							<input
+								type="text"
+								placeholder="Name"
+								class="input w-full max-w-xs"
+								bind:value={profile.musicPlayer.songName}
+							/>
+						</div>
+						<div
+							class="flex flex-row justify-center items-center gap-2"
+							transition:fade={{ duration: 200 }}
+						>
+							<label for="">Artist</label>
+							<input
+								type="text"
+								placeholder="Artist"
+								class="input w-full max-w-xs"
+								bind:value={profile.musicPlayer.songArtist}
+							/>
+						</div>
+						<div
+							class="flex flex-row justify-center items-center gap-2"
+							transition:fade={{ duration: 200 }}
+						>
+							<!-- Cover file -->
+							<label for="">Cover</label>
+							<input
+								type="file"
+								accept="image/*"
+								class="file-input file-input-bordered w-full max-w-xs"
+								on:change={(ev) => {
+									// @ts-ignore
+									const file = ev.target.files?.[0];
+								}}
+							/>
+						</div>
+						<div
+							class="flex flex-row justify-center items-center gap-2"
+							transition:fade={{ duration: 200 }}
+						>
+							<!-- Audio file -->
+							<label for="">Audio</label>
+							<input
+							type="file"
+							accept="audio/mpeg"
+								class="file-input file-input-bordered w-full max-w-xs"
+								on:change={(ev) => {
+									// @ts-ignore
+									const file = ev.target.files?.[0];
+									if (file) {
+										if (file.type != 'audio/mpeg') {
+											alert("Only .mp3 files are allowed to be uploaded here")
+											return;
+										}
+									}
+								}}
+							/>
+						</div>
+					</div>
+				{/if}
+			</div>
+			<button type="submit" class="btn-primary btn my-4 rounded-md" on:click={() => updateProfile()}>Save</button>
 		</div>
 	</div>
 {:else}
@@ -212,7 +382,8 @@
 		--cp-input-color: #555;
 		--cp-button-hover-color: #777;
 	}
-	input[type='text'] {
+	input[type='text'],
+	textarea {
 		@apply bg-base-200;
 	}
 </style>

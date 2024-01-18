@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import MusicPlayer from './MusicPlayer.svelte';
+	import type { FontOptions, UserProfile } from '$lib';
 	export let isExample: boolean = false;
 
 	let fontA: FontOptions = {
