@@ -2,6 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 import * as jose from 'jose';
 import { prisma } from '$lib/server/db';
+import { exampleProfile, type UserProfile } from '$lib';
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
     let payload: jose.JWTPayload;
@@ -41,14 +42,13 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
             }
         }
     })
+
     if (!profile || !profile.profile) {
         return {
-            "newProfile": true,
-            profile: null
+            profile: exampleProfile
         }
     }
     return {
-        newProfile: false,
-        profile: profile?.profile
+        profile: profile.profile as unknown as UserProfile
     }
 };
