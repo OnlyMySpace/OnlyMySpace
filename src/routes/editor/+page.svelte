@@ -167,6 +167,7 @@
 							<select
 								class="select select-bordered w-full max-w-xs"
 								on:change={(ev) => handleSocialsChange(ev, social)}
+								value={social.name}
 							>
 								<option disabled selected>Social media name</option>
 								<option>Discord</option>
