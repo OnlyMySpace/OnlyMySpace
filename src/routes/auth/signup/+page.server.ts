@@ -1,8 +1,10 @@
+import { SECRET_TURNSTILE_KEY } from "$env/static/private";
 import { prisma } from "$lib/server/db";
 import { Prisma } from "@prisma/client";
 import { fail, type Actions } from "@sveltejs/kit";
 import bcrypt from 'bcrypt'
 import * as jose from "jose";
+import { validateToken } from "sveltekit-turnstile";
 
 export const actions: Actions = {
     default: async ({ cookies, request }) => {
@@ -10,6 +12,14 @@ export const actions: Actions = {
         const email = data.get("email");
         const username = data.get("username")
         const password = data.get("password");
+        const token = data.get("token");
+        if (!token) {
+            return fail(400, {
+                message: "Please complete the captcha",
+                success: false
+            })
+        }
+        const success = await validateToken(token.toString(), SECRET_TURNSTILE_KEY);
 
         if (!email || !username || !password) {
             return fail(400,{

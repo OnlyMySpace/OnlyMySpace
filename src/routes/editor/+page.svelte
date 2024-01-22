@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { exampleProfile, type Social, type UserProfile } from '$lib';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import { fade } from 'svelte/transition';
@@ -109,7 +110,7 @@
 		<h1 class="text-3xl font-bold text-center py-4">
 			Make your profile your <span class="text-primary underline underline-offset-4">own</span>
 		</h1>
-		<div class="flex flex-col gap-4 justify-center items-center">
+		<div class="flex flex-col justify-center items-center">
 			<div class="flex flex-col justify-center items-center gap-2">
 				<h1 class="text-2xl font-bold pb-4">The important stuff!</h1>
 				<!-- This part is for pfp, username, pronnouns and bio -->

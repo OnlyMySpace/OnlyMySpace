@@ -2,6 +2,9 @@
 	import { applyAction, enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { fly } from 'svelte/transition';
+	import { Turnstile } from 'sveltekit-turnstile';
+	import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
+	console.log(PUBLIC_TURNSTILE_SITE_KEY);
 	let msg: string | undefined;
     $: {
         if (msg !== undefined) {
@@ -62,6 +65,7 @@
 			class="input w-full max-w-xs border-2 border-secondary"
 			id="password"
 		/>
+		<Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY}/>
 		<button type="submit" class="btn-primary btn my-4 rounded-md">Sign up</button>
 		<!-- <div class="divider divider-neutral w-10/12 self-center">OR</div>
         <button on:click={() => discordAuth()} class="btn-primary btn my-4 rounded-md">
