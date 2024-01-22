@@ -17,14 +17,14 @@ export const actions: Actions = {
             const token = data.get("token");
             if (!token) {
                 return fail(400, {
-                    message: "Please complete the captcha",
+                    message: "Please complete the captcha [1]",
                     success: false
                 })
             }
             const success = await validateToken(token.toString(), SECRET_TURNSTILE_KEY);            
             if (!success) {
                 return fail(400, {
-                    message: "Please complete the captcha",
+                    message: "Please complete the captcha [2]",
                     success: false
                 })
             }
