@@ -14,6 +14,12 @@ export const actions: Actions = {
         const username = data.get("username")
         const password = data.get("password");
         if (!dev) {
+            if (SECRET_TURNSTILE_KEY) {
+                return fail(400, {
+                    message: "Please complete the captcha [0]",
+                    success: false
+                })
+            }
             const token = data.get("token");
             if (!token) {
                 return fail(400, {
