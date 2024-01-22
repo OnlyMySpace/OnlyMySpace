@@ -65,11 +65,11 @@
 			class="input w-full max-w-xs border-2 border-secondary"
 			id="password"
 		/>
+		{#if dev}
 		<div class="w-full max-w-xs my-4">
-			{#if dev}
 			<Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY}/>
-			{/if}
 		</div>
+		{/if}
 		<button type="submit" class="btn-primary btn my-4 rounded-md">Sign up</button>
 		<!-- <div class="divider divider-neutral w-10/12 self-center">OR</div>
         <button on:click={() => discordAuth()} class="btn-primary btn my-4 rounded-md">
