@@ -5,6 +5,9 @@
 	import { Turnstile } from 'sveltekit-turnstile';
 	import { PUBLIC_TURNSTILE_SITE_KEY } from '$env/static/public';
 	import { dev } from '$app/environment';
+	if (dev) {
+		console.log('Dev mode is on');
+	}
 	let msg: string | undefined;
     $: {
         if (msg !== undefined) {
@@ -65,7 +68,7 @@
 			class="input w-full max-w-xs border-2 border-secondary"
 			id="password"
 		/>
-		{#if dev}
+		{#if !dev}
 		<div class="w-full max-w-xs my-4">
 			<Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY}/>
 		</div>
