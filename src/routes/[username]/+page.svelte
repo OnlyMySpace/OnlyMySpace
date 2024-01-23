@@ -3,4 +3,4 @@
 	import type { PageData } from "./$types";
     export let data: PageData
 </script>
-<Profile profile={data.profile}/>
+<Profile profile={JSON.parse(data.profile.toString())}/>

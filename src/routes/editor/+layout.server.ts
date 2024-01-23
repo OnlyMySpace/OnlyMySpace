@@ -49,6 +49,6 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
         }
     }
     return {
-        profile: profile.profile as unknown as UserProfile
+        profile: JSON.parse(profile.profile as unknown as string)
     }
 };

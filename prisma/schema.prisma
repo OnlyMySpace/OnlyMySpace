@@ -16,7 +16,7 @@ model User {
   username String @unique
   username_case_insensitive String @unique
   password String
-  email String
+  email String @unique
   profile UserProfile?
   paidUser Boolean
 }

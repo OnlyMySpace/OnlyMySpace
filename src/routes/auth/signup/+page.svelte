@@ -40,7 +40,6 @@
 				if (result.type === 'success') {
 					goto('/editor');
 				} else if (result.type === 'failure') {
-					console.log(result.data);
 					if (result.data && result.data.message && typeof result.data.message === 'string')
 						msg = result.data.message;
 				}

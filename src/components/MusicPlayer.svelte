@@ -18,7 +18,6 @@
     $: if(vol) {
         if (audio) {
             audio.volume = vol;
-            console.log("owo")
         }
     }
 </script>

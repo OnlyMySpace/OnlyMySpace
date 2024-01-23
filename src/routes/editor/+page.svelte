@@ -59,12 +59,11 @@
 
 	function updateProfile() {
 		if (!profile) return;
+		let formData = new FormData();
+		formData.append('profile', JSON.stringify(profile));
 		fetch(window.location.href, {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(profile)
+			body: formData
 		})
 	}
 
@@ -84,7 +83,6 @@
 			}
 			return s;
 		});
-		console.log(profile.socials);
 	}
 
 	function handleProfilePicChange(event: Event) {
