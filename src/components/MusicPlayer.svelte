@@ -23,7 +23,7 @@
 </script>
 
 <div class="card card-compact w-fit h-fit bg-base-100 shadow-xl">
-    <figure><img src={songCover} alt="Album" class="h-52 w-52"/></figure>
+    <figure><img src={songCover} alt="Album" class="h-52 w-52 object-cover object-center"/></figure>
     <div class="card-body">
         <h2 class="card-title">{songName}</h2>
         <p>{songArtist}</p>

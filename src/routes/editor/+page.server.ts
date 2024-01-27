@@ -1,7 +1,10 @@
+import { IMGKIT_ENDPOINT, PRIVATE_IMGKIT } from "$env/static/private";
+import { PUBLIC_IMGKIT } from "$env/static/public";
 import type { UserProfile } from "$lib";
 import { prisma } from "$lib/server/db";
 import { veirfyJWT } from "$lib/server/utils";
 import { redirect, type Actions, fail } from "@sveltejs/kit";
+import ImageKit from "imagekit";
 
 export const actions: Actions = {
     default: async ({ cookies, request }) => {
@@ -18,6 +21,14 @@ export const actions: Actions = {
         }
         let email = jwt.payload.email as string
         let formData = await request.formData()
+        let profileimg = formData.get('profile-img')
+        let bgimg = formData.get('background-img')
+        let imgkit = new ImageKit({
+            privateKey: PRIVATE_IMGKIT,
+            publicKey: PUBLIC_IMGKIT,
+            urlEndpoint: IMGKIT_ENDPOINT
+        });
+
         let profile = formData.get('profile')
         if (!profile) {
             return fail(400, {
@@ -35,7 +46,6 @@ export const actions: Actions = {
                 message: "User not found (Contact support)"
             })
         }
-        // Remove nonchangeable data from profile
         let profileData: UserProfile = JSON.parse(profile.toString())
         // Replace ID with real ID
         profileData.id = uid.id
@@ -46,6 +56,13 @@ export const actions: Actions = {
                 }
             }
         })
+        if (profileimg) {
+            profileData.pfp.url = await uploadFile(profileimg as File, profileData, 'profile', imgkit)
+        }
+        if (bgimg) {
+            profileData.backgroundType = 'image'
+            profileData.background = await uploadFile(bgimg as File, profileData, 'background', imgkit)
+        }
         if (!hasProfile) {
             await prisma.userProfile.create({
                 data: {
@@ -69,3 +86,14 @@ export const actions: Actions = {
         }
     }
 };
+
+async function uploadFile(file: File, profileData: UserProfile, suffix: string, imgkit: ImageKit): Promise<string> {
+    let buf = await file.arrayBuffer()
+    let resp = await imgkit.upload({
+        file: Buffer.from(buf),
+        fileName: profileData.id.toString() + '-' + suffix,
+        useUniqueFileName: false,
+        overwriteFile: true
+    })
+    return resp.url
+}

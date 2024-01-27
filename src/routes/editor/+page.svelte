@@ -14,6 +14,15 @@
 			icon: string;
 		};
 	};
+
+	let assets: { [key: string]: File | null } = {
+		'background-img': null,
+		'profile-img': null,
+	};
+	$: {
+		console.debug(assets);
+	}
+
 	let socialMap: SocialMap = {
 		Discord: {
 			type: 'handle',
@@ -60,11 +69,16 @@
 	function updateProfile() {
 		if (!profile) return;
 		let formData = new FormData();
+		// Append all formData  in a seperate formData elem
+		for (let key in assets) {
+			let f = assets[key];
+			if (f) formData.append(key, f);
+		}
 		formData.append('profile', JSON.stringify(profile));
 		fetch(window.location.href, {
 			method: 'POST',
 			body: formData
-		})
+		});
 	}
 
 	export let data: PageData;
@@ -88,13 +102,16 @@
 	function handleProfilePicChange(event: Event) {
 		let reader = new FileReader();
 		reader.onload = () => {
-			if (!profile || !reader.result) return;
+			// @ts-expect-error
+			if (!profile || !reader.result || !event.target || !event.target.files) return;
 			pfpPreviewShown = true;
 			pfpPreview.setAttribute('src', reader.result as string);
+			// @ts-expect-error
+			assets['profile-img'] = event.target?.files?.[0] ?? null;
 		};
-		// @ts-ignore
+		// @ts-expect-error
 		if (!profile || !event.target || !event.target.files) return;
-		// @ts-ignore
+		// @ts-expect-error
 		reader.readAsDataURL(event.target.files[0]);
 	}
 
@@ -184,12 +201,21 @@
 					</label>
 				</div>
 				{#if profile.backgroundType == 'image'}
-					<input
-						type="text"
-						placeholder="Image URL"
-						class="input w-full max-w-xs"
-						bind:value={profile.background}
-					/>
+					<div class="flex flex-col justify-center items-center">
+						<label for="">Background Image</label>
+						<input
+							type="file"
+							name=""
+							class="file-input file-input-bordered"
+							on:change={(e) => {
+								// @ts-expect-error
+								const file = e.target.files?.[0];
+								if (file) {
+									assets['background-img'] = file;
+								}
+							}}
+						/>
+					</div>
 				{:else}
 					<div>
 						<ColorPicker label="Background Color" bind:hex={profile.background} />
@@ -305,7 +331,7 @@
 							class="flex flex-row justify-center items-center gap-2"
 							transition:fade={{ duration: 200 }}
 						>
-							<label for="">Name</label>
+							<label class="w-1/2" for="">Name</label>
 							<input
 								type="text"
 								placeholder="Name"
@@ -317,7 +343,7 @@
 							class="flex flex-row justify-center items-center gap-2"
 							transition:fade={{ duration: 200 }}
 						>
-							<label for="">Artist</label>
+							<label class="w-1/2" for="">Artist</label>
 							<input
 								type="text"
 								placeholder="Artist"
@@ -329,44 +355,16 @@
 							class="flex flex-row justify-center items-center gap-2"
 							transition:fade={{ duration: 200 }}
 						>
-							<!-- Cover file -->
-							<label for="">Cover</label>
-							<input
-								type="file"
-								accept="image/*"
-								class="file-input file-input-bordered w-full max-w-xs"
-								on:change={(ev) => {
-									// @ts-ignore
-									const file = ev.target.files?.[0];
-								}}
-							/>
-						</div>
-						<div
-							class="flex flex-row justify-center items-center gap-2"
-							transition:fade={{ duration: 200 }}
-						>
 							<!-- Audio file -->
-							<label for="">Audio</label>
-							<input
-							type="file"
-							accept="audio/mpeg"
-								class="file-input file-input-bordered w-full max-w-xs"
-								on:change={(ev) => {
-									// @ts-ignore
-									const file = ev.target.files?.[0];
-									if (file) {
-										if (file.type != 'audio/mpeg') {
-											alert("Only .mp3 files are allowed to be uploaded here")
-											return;
-										}
-									}
-								}}
-							/>
+							<label class="w-1/2" for="">Youtube link</label>
+							<input type="text" placeholder="Youtube link" class="input w-full max-w-xs" bind:value={profile.musicPlayer.songUrl}>
 						</div>
 					</div>
 				{/if}
 			</div>
-			<button type="submit" class="btn-primary btn my-4 rounded-md" on:click={() => updateProfile()}>Save</button>
+			<button type="submit" class="btn-primary btn my-4 rounded-md" on:click={() => updateProfile()}
+				>Save</button
+			>
 		</div>
 	</div>
 {:else}
