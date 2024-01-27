@@ -33,7 +33,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
                 filter: "audioonly",
                 quality: "highest",
             }).url;
-            profileInJSON.musicPlayer.songCover = `https://i.ytimg.com/vi/${data.videoDetails.videoId}/default.jpg`
+            profileInJSON.musicPlayer.songCover = `https://i.ytimg.com/vi/${data.videoDetails.videoId}/maxresdefault.jpg`
         } catch (err) {
             return {profile: profile.profile}
         }
