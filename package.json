@@ -45,7 +45,7 @@
 		"imagekit": "^3.2.5",
 		"jose": "^5.2.0",
 		"resend": "^3.1.0",
-		"svelte-awesome-color-picker": "^3.0.1",
+		"svelte-awesome-color-picker": "^3.0.4",
 		"sveltekit-turnstile": "^1.2.0",
 		"ytdl-core": "^4.11.5"
 	}
