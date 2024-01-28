@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import ColorPicker from 'svelte-awesome-color-picker';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	let pfpPreviewShown = false;
 	let pfpPreview: HTMLImageElement;
@@ -19,9 +19,8 @@
 		'background-img': null,
 		'profile-img': null,
 	};
-	$: {
-		console.debug(assets);
-	}
+
+	let updatedProfile = false;
 
 	let socialMap: SocialMap = {
 		Discord: {
@@ -66,7 +65,7 @@
 		}
 	};
 
-	function updateProfile() {
+	async function updateProfile() {
 		if (!profile) return;
 		let formData = new FormData();
 		// Append all formData  in a seperate formData elem
@@ -75,10 +74,16 @@
 			if (f) formData.append(key, f);
 		}
 		formData.append('profile', JSON.stringify(profile));
-		fetch(window.location.href, {
+		let res = await fetch(window.location.href, {
 			method: 'POST',
 			body: formData
 		});
+		if (res.status == 200) {
+			updatedProfile = true;
+			setTimeout(() => {
+				updatedProfile = false;
+			}, 3000);
+		}
 	}
 
 	export let data: PageData;
@@ -119,6 +124,15 @@
 	if (!data.profile) profile = exampleProfile;
 	else profile = data.profile;
 </script>
+
+{#if updatedProfile}
+<div  class="fixed top-0 left-1/2 -translate-x-1/2 z-50" transition:fly|local={{ y: -100 }}>
+	<div class="flex flex-row justify-center w-96 h-16 items-center gap-2 border-solid bg-opacity-80 backdrop-blur-md bg-gray-700 rounded-lg">
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="fill-green-500" d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+		<p class="text-1xl font-bold">Successfully updated your profile</p>
+	</div>
+</div>
+{/if}
 
 {#if profile}
 	<div class="flex flex-col h-screen w-screen">
