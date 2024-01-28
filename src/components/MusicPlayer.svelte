@@ -23,9 +23,9 @@
 </script>
 
 <div class="card card-compact w-fit h-fit bg-base-100 shadow-xl">
-    <figure><img src={songCover} alt="Album" class="h-52 w-52 object-cover object-center"/></figure>
-    <div class="card-body">
-        <h2 class="card-title">{songName}</h2>
+    <figure class="rounded-lg"><img src={songCover} alt="Album" class="h-52 w-52 object-cover object-center rounded-lg"/></figure>
+    <div class="card-body w-60">
+        <h2 class="card-title break-words">{songName}</h2>
         <p>{songArtist}</p>
         <input class="range" type="range" name="range" bind:value={vol} id="" min="0" max="1" step="0.01">
         <div class="card-actions justify-end">

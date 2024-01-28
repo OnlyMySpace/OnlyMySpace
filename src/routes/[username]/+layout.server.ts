@@ -17,28 +17,6 @@ export const load: LayoutServerLoad = async ({ params }) => {
             message: "User not found",
         })
     }
-    let profileInJSON: UserProfile = JSON.parse(profile.profile)
-    if (profileInJSON && profileInJSON.musicPlayer) {
-        let data;
-        try {
-            data = await ytdl.getInfo(
-                profileInJSON.musicPlayer.songUrl
-            );
-        } catch (err) {
-            return {profile: profile.profile}
-        }
-
-        try {
-            profileInJSON.musicPlayer.songUrl = ytdl.chooseFormat(data.formats, {
-                filter: "audioonly",
-                quality: "highest",
-            }).url;
-            profileInJSON.musicPlayer.songCover = `https://i.ytimg.com/vi/${data.videoDetails.videoId}/maxresdefault.jpg`
-        } catch (err) {
-            return {profile: profile.profile}
-        }
-    }
-    profile.profile = JSON.stringify(profileInJSON)
     return {
         profile: profile.profile,
     }
