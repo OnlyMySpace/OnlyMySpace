@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { exampleProfile, type Social, type UserProfile } from '$lib';
-	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import { fade, fly } from 'svelte/transition';

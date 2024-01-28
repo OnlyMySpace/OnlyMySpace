@@ -1,8 +1,6 @@
 import { prisma } from "$lib/server/db";
-import { error, fail } from "@sveltejs/kit";
-import ytdl from 'ytdl-core';
+import { error } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
-import type { UserProfile } from "$lib";
 
 export const load: LayoutServerLoad = async ({ params }) => {
     const profile = await prisma.userProfile.findFirst({

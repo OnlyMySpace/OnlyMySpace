@@ -2,7 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 import * as jose from 'jose';
 import { prisma } from '$lib/server/db';
-import { exampleProfile, type UserProfile } from '$lib';
+import { exampleProfile } from '$lib';
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
     let payload: jose.JWTPayload;
