@@ -9,19 +9,23 @@
 		console.log('Dev mode is on');
 	}
 	let msg: string | undefined;
-    $: {
-        if (msg !== undefined) {
-            setTimeout(() => {
-                msg = undefined;
-            }, 3000);
-        }
-    }
+	$: {
+		if (msg !== undefined) {
+			setTimeout(() => {
+				msg = undefined;
+			}, 3000);
+		}
+	}
 </script>
 
 <div class="flex flex-col justify-center items-center h-screen w-screen">
 	<div class="toast toast-top toast-end">
 		{#if msg !== undefined}
-			<div class="alert alert-error" in:fly={{ y: 20, duration: 200 }} out:fly={{ y: -20, duration: 200 }}>
+			<div
+				class="alert alert-error"
+				in:fly={{ y: 20, duration: 200 }}
+				out:fly={{ y: -20, duration: 200 }}
+			>
 				<span>{msg}</span>
 			</div>
 		{/if}
@@ -67,10 +71,16 @@
 			class="input w-full max-w-xs border-2 border-secondary"
 			id="password"
 		/>
-		{#if !dev}
-		<div class="w-full max-w-xs my-4">
-			<Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY}/>
+		<div class="flex flex-row justify-center items-center gap-3 my-4">
+			<input type="checkbox" class="checkbox checkbox-primary" name="tos" id="tos" />
+			<label for="tos"
+				>I agree to the <a href="/tos" class="link link-primary">Terms of Service</a></label
+			>
 		</div>
+		{#if !dev}
+			<div class="w-full max-w-xs my-4">
+				<Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} />
+			</div>
 		{/if}
 		<button type="submit" class="btn-primary btn my-4 rounded-md">Sign up</button>
 		<!-- <div class="divider divider-neutral w-10/12 self-center">OR</div>

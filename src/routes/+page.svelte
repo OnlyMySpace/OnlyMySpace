@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Profile from '../components/Profile.svelte';
-	let isMobileDevice: boolean;
+	let isMobileDevice: boolean = true;
 	onMount(() => {
 		isMobileDevice =
 			window.navigator.userAgent.includes('Mobile') ||
