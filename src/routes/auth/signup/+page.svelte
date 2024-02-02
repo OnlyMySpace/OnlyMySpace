@@ -40,6 +40,10 @@
 			// `action` is the URL to which the form is posted
 			// calling `cancel()` will prevent the submission
 			// `submitter` is the `HTMLElement` that caused the form to be submitted
+			if (formData.get('tos') !== 'on') {
+				msg = 'You must agree to the terms of service in order to sign up!';
+				cancel();
+			}
 			return async ({ result, update }) => {
 				if (result.type === 'success') {
 					goto('/editor');
