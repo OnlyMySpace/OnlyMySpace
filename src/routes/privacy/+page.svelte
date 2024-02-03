@@ -1,5 +1,5 @@
 <main class="p-6">
-	<div class="max-w-2xl mx-auto bg-white p-8 rounded-md shadow-md text-center flex flex-col gap-4">
+	<div class="mx-auto p-8 rounded-md shadow-md text-center flex flex-col gap-4">
 		<h1 class="text-2xl font-bold mb-6">OnlyMySpace - Privacy Policy</h1>
 
 		<p class="mb-6">Last Updated: 2024-02-02</p>
