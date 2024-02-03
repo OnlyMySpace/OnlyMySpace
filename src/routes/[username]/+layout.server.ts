@@ -1,12 +1,14 @@
 import { prisma } from "$lib/server/db";
 import { error } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
+import { limiter } from "$lib/server/utils";
 
-export const load: LayoutServerLoad = async ({ params }) => {
+export const load: LayoutServerLoad = async (event) => {
+    await limiter.cookieLimiter?.preflight(event);
     const profile = await prisma.userProfile.findFirst({
         where: {
             user: {
-                username_case_insensitive: params.username.toLowerCase()
+                username_case_insensitive: event.params.username.toLowerCase()
             }
         }
     })
@@ -17,5 +19,6 @@ export const load: LayoutServerLoad = async ({ params }) => {
     }
     return {
         profile: profile.profile,
+        views: profile.views
     }
 }

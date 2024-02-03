@@ -1,4 +1,19 @@
+import { SECRET_RATELIMIT_KEY } from '$env/static/private';
 import * as jose from 'jose';
+import { RateLimiter } from "sveltekit-rate-limiter/server";
+
+export const limiter = new RateLimiter({
+    // A rate is defined as [number, unit]
+    IP: [3, 'h'], // IP address limiter
+    IPUA: [4, 'h'], // IP + User Agent limiter
+    cookie: {
+      // Cookie limiter
+      name: 'rl', // Unique cookie name for this limiter
+      secret: SECRET_RATELIMIT_KEY,
+      rate: [5, 'h'],
+      preflight: true // Require preflight call (see load function)
+    }
+  });
 
 export async function veirfyJWT(jwt: string): Promise<{success: boolean, payload: jose.JWTPayload | null}>  {
     if (!jwt) {

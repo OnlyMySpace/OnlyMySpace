@@ -36,7 +36,6 @@
 			}
 		],
 		bio: 'A professional idiot and (not so professional) WebDev',
-		widget: null,
 		musicPlayer: {
 			songName: 'Amerika',
 			songArtist: 'Rammstein',
@@ -44,11 +43,12 @@
 				'https://lastfm.freetls.fastly.net/i/u/770x0/36188c60827943a38870427b07a892eb.jpg#36188c60827943a38870427b07a892eb',
 			songUrl:
 				'https://cdn.discordapp.com/attachments/1196199160412639244/1196910955376951306/Rammstein_-_Amerika_Official_Video_Rr8ljRgcJNM.opus'
-		}
+		},
+		cursor: null
 	};
 
 	export let profile: UserProfile = exampleProfile;
-
+	export let views: number = 0;
 	let bgStyle: string;
 	if (profile.backgroundType == 'image') {
 		bgStyle = `background-image: url('${profile.background}')`;
@@ -102,6 +102,14 @@
 				}
 			}
 		}
+		setTimeout(() => {
+			fetch('/api/views', {
+				body: JSON.stringify({
+					id: profile.id
+				}),
+				method: 'POST'
+			})
+		},1500)
 	});
 </script>
 
@@ -147,6 +155,12 @@
 					</div>
 				</div>
 			{/if}
+		</div>
+		<div class="fixed bottom-5 right-5 flex flex-row gap-2">
+			<span class="inline-flex gap-2">
+				<img class="w-6 h-6" src="/eye.svg" alt="Views" />
+				{views}
+			</span>
 		</div>
 	</div>
 </div>
