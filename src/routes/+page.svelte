@@ -14,6 +14,7 @@
 <svelte:body data-theme="dracula" />
 <svelte:head>
 	<title>OnlyMySpace</title>
+	<link rel="canonical" href="https://only-my.space"/>
 	<meta name="description" content="Your own place on the web that is only yours!" />
 	<meta name="keywords" content="profile, OnlyMySpace, bio, my bio" />
 	<!-- Open Graph / Facebook -->
