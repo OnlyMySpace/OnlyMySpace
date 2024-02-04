@@ -144,6 +144,7 @@
 			{#if loadedMusicData}
 				<MusicPlayer {...musicPlayerData} />
 			{:else}
+				{#if profile.musicPlayer}
 				<div class="card card-compact w-fit h-fit bg-base-100 shadow-xl skeleton">
 					<div class="flex justify-center">
 						<figure class="rounded-lg skeleton h-52 w-52"></figure>
@@ -154,6 +155,7 @@
 						<div class="h-3 skeleton rounded-md w-1/3"></div>
 					</div>
 				</div>
+				{/if}
 			{/if}
 		</div>
 		<div class="fixed bottom-5 right-5 flex flex-row gap-2">
