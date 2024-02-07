@@ -18,6 +18,10 @@
 	}
 </script>
 
+<title>
+	Signup - OnlyMySpace
+</title>
+
 <div class="flex flex-col justify-center items-center h-screen w-screen">
 	<div class="toast toast-top toast-end">
 		{#if msg !== undefined}

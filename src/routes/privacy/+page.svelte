@@ -1,3 +1,6 @@
+<title>
+	Privacy - OnlyMySpace
+</title>
 <main class="p-6">
 	<div class="mx-auto p-8 rounded-md shadow-md text-center flex flex-col gap-4">
 		<h1 class="text-2xl font-bold mb-6">OnlyMySpace - Privacy Policy</h1>
