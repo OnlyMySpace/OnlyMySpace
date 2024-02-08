@@ -14,7 +14,8 @@
 <svelte:body data-theme="dracula" />
 <svelte:head>
 	<title>OnlyMySpace</title>
-	<link rel="canonical" href="https://only-my.space"/>
+
+	<link rel="canonical" href="https://only-my.space" />
 	<meta name="description" content="Your own place on the web that is only yours!" />
 	<meta name="keywords" content="profile, OnlyMySpace, bio, my bio" />
 	<!-- Open Graph / Facebook -->
@@ -25,10 +26,7 @@
 	<!-- Twitter -->
 	<meta property="twitter:url" content="https://only-my.space/" />
 	<meta property="twitter:title" content="OnlyMySpace" />
-	<meta
-		property="twitter:description"
-		content="Your own place on the web that is only yours!"
-	/>
+	<meta property="twitter:description" content="Your own place on the web that is only yours!" />
 </svelte:head>
 <div class="flex flex-col justify-center items-center h-screen">
 	<div class="z-50 flex justify-center items-center flex-col">

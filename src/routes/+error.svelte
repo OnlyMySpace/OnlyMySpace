@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 </script>
+<title>
+	{$page.status} - OnlyMySpace
+</title>
 <div class="flex flex-col justify-center items-center h-screen">
 	<div class=" bg-base-200 flex flex-col justify-center items-center p-10 border-solid rounded-lg shadow-lg">
 		<h1 class="text-center text-3xl font-bold">{$page.status}</h1>

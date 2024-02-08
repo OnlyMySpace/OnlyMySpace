@@ -114,9 +114,6 @@
 </script>
 
 <svelte:head>
-	{#if !isExample}
-		<title>{profile.uname}</title>
-	{/if}
 	{#if profile.font.is_google_font}
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
