@@ -10,6 +10,13 @@ export const load: LayoutServerLoad = async (event) => {
             user: {
                 username_case_insensitive: event.params.username.toLowerCase()
             }
+        },
+        include: {
+            user: {
+                include: {
+                    
+                }
+            }
         }
     })
     if (!profile || !profile.profile) {
@@ -19,6 +26,6 @@ export const load: LayoutServerLoad = async (event) => {
     }
     return {
         profile: profile.profile,
-        views: profile.views
+        views: profile.views,
     }
 }
