@@ -27,6 +27,9 @@ model User {
   profile UserProfile?
   paidUser Boolean
   badges Badges[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+  blacklisted Boolean @default(false)
 }
 
 model UserProfile {

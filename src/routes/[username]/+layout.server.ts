@@ -2,6 +2,7 @@ import { prisma } from "$lib/server/db";
 import { error } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 import { limiter } from "$lib/server/utils";
+import { goto } from "$app/navigation";
 
 export const load: LayoutServerLoad = async (event) => {
     await limiter.cookieLimiter?.preflight(event);
@@ -14,7 +15,8 @@ export const load: LayoutServerLoad = async (event) => {
         include: {
             user: {
                 select: {
-                    badges: true
+                    badges: true,
+                    blacklisted: true
                 }
             }
         }
@@ -27,6 +29,7 @@ export const load: LayoutServerLoad = async (event) => {
     return {
         profile: profile.profile,
         views: profile.views,
-        badges: profile.user.badges
+        badges: profile.user.badges,
+        blacklisted: profile.user.blacklisted
     }
 }
