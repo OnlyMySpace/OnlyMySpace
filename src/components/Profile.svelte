@@ -49,6 +49,8 @@
 
 	export let profile: UserProfile = exampleProfile;
 	export let views: number = 0;
+	export let badges: string[] = [];
+
 	let bgStyle: string;
 	if (profile.backgroundType == 'image') {
 		bgStyle = `background-image: url('${profile.background}')`;
@@ -134,7 +136,7 @@
 	<div
 		class="flex flex-col justify-center items-center gap-3 h-screen w-screen rounded-lg shadow-2xl backdrop-blur-sm lg:w-1/2 lg:h-fit lg:py-10"
 	>
-		<UserCard {profile} />
+		<UserCard {profile} {badges} />
 		<SocialMedias {profile} />
 		<p class="text-2xl font-bold text-center">{profile.bio}</p>
 		<div>

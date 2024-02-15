@@ -40,11 +40,11 @@
 		},
 		Spotify: {
 			type: 'url',
-			icon: '/socials/spotify.svg'
+			icon: '/socials/spotify.png'
 		},
 		Youtube: {
 			type: 'url',
-			icon: '/socials/youtube.svg'
+			icon: '/socials/youtube.png'
 		},
 		Tiktok: {
 			type: 'url',
@@ -52,7 +52,7 @@
 		},
 		Paypal: {
 			type: 'url',
-			icon: '/socials/paypal.svg'
+			icon: '/socials/paypal.png'
 		},
 		Patreon: {
 			type: 'url',

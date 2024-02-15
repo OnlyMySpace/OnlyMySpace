@@ -27,15 +27,11 @@ model User {
   profile UserProfile?
   paidUser Boolean
   badges Badges[] @default([])
-  @@unique([id,badges])
 }
 
 model UserProfile {
   id Int @id @unique @default(autoincrement())
-  user User @relation(fields: [id,badges], references: [id,badges])
-  badges Badges[]
+  user User @relation(fields: [id], references: [id])
   profile String @default("{}")
   views Int @default(0)
-  @@unique([id,badges])
-
 }

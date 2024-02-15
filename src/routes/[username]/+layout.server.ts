@@ -13,8 +13,8 @@ export const load: LayoutServerLoad = async (event) => {
         },
         include: {
             user: {
-                include: {
-                    
+                select: {
+                    badges: true
                 }
             }
         }
@@ -27,5 +27,6 @@ export const load: LayoutServerLoad = async (event) => {
     return {
         profile: profile.profile,
         views: profile.views,
+        badges: profile.user.badges
     }
 }

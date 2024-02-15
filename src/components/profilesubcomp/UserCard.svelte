@@ -2,6 +2,7 @@
 	import type { UserProfile } from "$lib";
 
     export let profile: UserProfile;
+	export let badges: string[] = [];
 </script>
 
 <img
@@ -13,6 +14,10 @@
 />
 <h1 class="text-5xl font-bold text-center sm:pb-4 tooltip" data-tip={'ID ' + profile.id}>
 	{profile.uname}<span style="color: {profile.textColor}; opacity:0.65"
-		>{profile.pronnouns ? ' - ' + profile.pronnouns : ''}</span
-	>
+		>{profile.pronnouns ? ' - ' + profile.pronnouns : ''}</span>
 </h1>
+<div class="flex flex-wrap justify-center gap-2">
+	{#each badges as badge}
+	<span class="badge badge-lg badge-outline badge-primary">{badge}</span>
+	{/each}
+</div>
