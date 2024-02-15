@@ -11,6 +11,13 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Badges {
+  OG
+  DONATOR
+  VERIFIED
+  ADMIN
+}
+
 model User {
   id Int @id @unique @default(autoincrement())
   username String @unique
@@ -19,6 +26,7 @@ model User {
   email String @unique
   profile UserProfile?
   paidUser Boolean
+  badges Badges[] @default([])
 }
 
 model UserProfile {
