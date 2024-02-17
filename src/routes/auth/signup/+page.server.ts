@@ -11,7 +11,7 @@ export const actions: Actions = {
     default: async ({ cookies, request }) => {
         const data = await request.formData();
         const email = data.get("email");
-        const username = data.get("username")
+        const username_form = data.get("username")
         const password = data.get("password");
         if (!dev) {
             if (!SECRET_TURNSTILE_KEY) {
@@ -35,7 +35,7 @@ export const actions: Actions = {
                 })
             }
         }
-        if (!email || !username || !password) {
+        if (!email || !username_form || !password) {
             return fail(400,{
                 message: "Please enter all fields",
                 success: false
@@ -53,14 +53,19 @@ export const actions: Actions = {
                 success: false
             })
         }
-        if (username.toString().length < 3) {
+        if (username_form.toString().length < 3) {
             return fail(400,{
                 message: "Username must be at least 3 characters",
                 success: false
             })
-        } else if (username.toString().length > 16) {
+        } else if (username_form.toString().length > 16) {
             return fail(400,{
                 message: "Username must be less than 16 characters",
+                success: false
+            })
+        } else if (username_form.toString().trim().includes(' ')) {
+            return fail(400,{
+                message: "Username cannot contain spaces",
                 success: false
             })
         }
@@ -70,8 +75,8 @@ export const actions: Actions = {
                 data: {
                     email: email.toString(),
                     password: hashedPassword,
-                    username: username.toString(),
-                    username_case_insensitive: username.toString().toLowerCase(),
+                    username: username_form.toString().trim(),
+                    username_case_insensitive: username_form.toString().trim().toLowerCase(),
                     paidUser: false,
                 }
             })

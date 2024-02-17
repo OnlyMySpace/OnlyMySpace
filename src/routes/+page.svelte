@@ -48,10 +48,10 @@
 		>
 			<div class="mockup-browser border border-base-300">
 				<div class="mockup-browser-toolbar">
-					<div class="input border border-base-300">https://only-my.space/nano -- Click Play!</div>
+					<div class="input border border-base-300">https://only-my.space/nano</div>
 				</div>
-				<div class="flex justify-center px-4 py-16 border-t border-base-300">
-					<Profile isExample={true} />
+				<div class="flex justify-center px-4 border-t border-base-300">
+					<Profile isExample={true} views={69} badges={["OG","ADMIN"]}/>
 				</div>
 			</div>
 		</div>

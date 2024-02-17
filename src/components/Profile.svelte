@@ -14,36 +14,27 @@
 	};
 
 	let exampleProfile: UserProfile = {
-		font: fontA,
 		id: 0,
-		pronnouns: 'Any pronnouns',
+		bio: 'A very passionate developer! (lol)\nSpeaks: Hungarian (native), English',
 		pfp: {
-			border_color: '#9CA3DB',
+			url: 'https://ik.imagekit.io/onlymyspace/0',
 			no_border: false,
-			url: 'https://cdn.discordapp.com/avatars/1145633886286663742/41ec66dc219d7d2af1d96d6f929706d8.webp?size=1024'
+			border_color: '#9CA3DB'
+		},
+		font: {
+			font_alt: 'monospace',
+			font_url: '/fonts/Minecraft.ttf',
+			font_name: 'Minecraft',
+			is_google_font: false
 		},
 		uname: 'nano',
-		textColor: '#fff',
-		backgroundType: 'image',
+		socials: [{ icon: '/socials/discord.svg', name: 'discord', type: 'handle', value: 'im_nano' }],
+		pronnouns: 'Any pronnouns',
+		textColor: '#ffffff',
 		background:
-			'https://cdn.discordapp.com/attachments/1145660131711926282/1196095795066327060/pexels-malcolm-gillanders-16552418.jpg',
-		socials: [
-			{
-				name: 'discord',
-				type: 'handle',
-				value: 'im_nano',
-				icon: '/socials/discord.svg'
-			}
-		],
-		bio: 'A professional idiot and (not so professional) WebDev',
-		musicPlayer: {
-			songName: 'Amerika',
-			songArtist: 'Rammstein',
-			songCover:
-				'https://lastfm.freetls.fastly.net/i/u/770x0/36188c60827943a38870427b07a892eb.jpg#36188c60827943a38870427b07a892eb',
-			songUrl:
-				'https://cdn.discordapp.com/attachments/1196199160412639244/1196910955376951306/Rammstein_-_Amerika_Official_Video_Rr8ljRgcJNM.opus'
-		},
+			'https://ik.imagekit.io/onlymyspace/0-background',
+		musicPlayer: null,
+		backgroundType: 'image',
 		cursor: null
 	};
 
@@ -110,8 +101,8 @@
 					id: profile.id
 				}),
 				method: 'POST'
-			})
-		},1500)
+			});
+		}, 1500);
 	});
 </script>
 
@@ -142,8 +133,7 @@
 		<div>
 			{#if loadedMusicData}
 				<MusicPlayer {...musicPlayerData} />
-			{:else}
-				{#if profile.musicPlayer}
+			{:else if profile.musicPlayer}
 				<div class="card card-compact w-fit h-fit bg-base-100 shadow-xl skeleton">
 					<div class="flex justify-center">
 						<figure class="rounded-lg skeleton h-52 w-52"></figure>
@@ -154,7 +144,6 @@
 						<div class="h-3 skeleton rounded-md w-1/3"></div>
 					</div>
 				</div>
-				{/if}
 			{/if}
 		</div>
 		<div class="fixed bottom-5 right-5 flex flex-row gap-2">
