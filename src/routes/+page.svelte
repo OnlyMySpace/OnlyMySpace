@@ -9,6 +9,13 @@
 			window.navigator.userAgent.includes('Android') ||
 			window.navigator.userAgent.includes('iPhone');
 	});
+
+	function easterEvent(e: KeyboardEvent) {
+		if (e.key == 'Enter') {
+			alert("This is my space! Not your browser use your real searchbar!!")
+		}
+	}
+
 </script>
 
 <svelte:body data-theme="dracula" />
@@ -48,7 +55,9 @@
 		>
 			<div class="mockup-browser border border-base-300">
 				<div class="mockup-browser-toolbar">
-					<div class="input border border-base-300">https://only-my.space/nano</div>
+					<div class="input border border-base-300">
+						<input on:keypress={(e) => {easterEvent(e)}} type="text" value="https://only-my.space/nano" />
+					</div>
 				</div>
 				<div class="flex justify-center px-4 border-t border-base-300">
 					<Profile isExample={true} views={69} badges={["OG","ADMIN"]}/>
