@@ -12,7 +12,7 @@
 
 	function easterEvent(e: KeyboardEvent) {
 		if (e.key == 'Enter') {
-			alert("This is my space! Not your browser use your real searchbar!!")
+			alert("This is my space! Not your browser, use your real searchbar!!")
 		}
 	}
 
