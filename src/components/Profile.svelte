@@ -129,7 +129,7 @@
 	>
 		<UserCard {profile} {badges} />
 		<SocialMedias {profile} />
-		<p class="text-2xl font-bold text-center">{profile.bio}</p>
+		<p class="text-2xl font-bold text-center whitespace-pre-wrap">{profile.bio}</p>
 		<div>
 			{#if loadedMusicData}
 				<MusicPlayer {...musicPlayerData} />
