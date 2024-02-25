@@ -404,6 +404,11 @@
 					on:click={() => updateProfile()}>Save</button
 				>
 			</div>
+			<footer class="flex flex-col justify-center items-center gap-2">
+				<p>Copyright © 2023 - {new Date().getFullYear()} - All Rights Reserved</p>
+				<p>Made with ❤️ by <a class="link link-primary" href="https://only-my.space/nano">nano</a></p>
+				<p>Join our <a class="link link-primary" href="https://discord.gg/SVsSQXf7HR">Discord</a></p>
+			</footer>
 		</div>
 	</div>
 {:else}
