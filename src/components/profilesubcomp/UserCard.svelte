@@ -26,7 +26,7 @@
 </h1>
 <div class="flex flex-wrap justify-center gap-2">
 	{#each badges as badge}
-	<span class="border-primary border-2 rounded-full py-2 px-4 backdrop-blur-lg tooltip" data-tip={badge}>
+	<span class="border-primary border-2 rounded-full w-16 h-8 backdrop-blur-3xl tooltip flex justify-center items-center" data-tip={badge}>
 		<img src={badgeMap[badge]} alt={badge} class="w-6 h-6" class:w-8={badge == "OG"} />
 	</span>
 	{/each}
