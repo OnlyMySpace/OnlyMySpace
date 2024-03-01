@@ -4,7 +4,7 @@
 	import type { FontOptions, UserProfile } from '$lib';
 	import UserCard from './profilesubcomp/UserCard.svelte';
 	import SocialMedias from './profilesubcomp/SocialMedias.svelte';
-	export let isExample: boolean = false;
+	import { dev } from '$app/environment';
 
 	let fontA: FontOptions = {
 		font_alt: 'monospace',
@@ -35,7 +35,7 @@
 			'https://ik.imagekit.io/onlymyspace/0-background',
 		musicPlayer: null,
 		backgroundType: 'image',
-		cursor: null
+		rainbowTextColor: false
 	};
 
 	export let profile: UserProfile = exampleProfile;
@@ -93,6 +93,13 @@
 					};
 					loadedMusicData = true;
 				}
+			} else {
+				profile.musicPlayer = null; // @FIXME: God save me	
+				console.error('Failed to fetch music player data');
+				if(dev) {
+					console.error(await req.text());
+					console.error(req.status);
+				}
 			}
 		}
 		setTimeout(() => {
@@ -127,7 +134,7 @@
 	<div
 		class="flex flex-col justify-center items-center gap-3 h-screen w-screen rounded-lg shadow-2xl backdrop-blur-sm lg:w-1/2 lg:h-fit lg:py-10"
 	>
-		<UserCard {profile} {badges} />
+		<UserCard {profile} {badges}/>
 		<SocialMedias {profile} />
 		<p class="text-2xl font-bold text-center whitespace-pre-wrap">{profile.bio}</p>
 		<div>

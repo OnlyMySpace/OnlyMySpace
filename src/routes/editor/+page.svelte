@@ -207,6 +207,14 @@
 				<div class="flex flex-col justify-center items-center">
 					<h1 class="text-2xl font-bold pb-4">Text Color</h1>
 					<ColorPicker label="Text Color" bind:hex={profile.textColor} />
+					<div class="flex flex-row justify-center items-center gap-2">
+						<label for="checkbox" class="label cursor-pointer">Rainbow text</label>
+						<input
+							type="checkbox"
+							class="toggle toggle-primary"
+							bind:checked={profile.rainbowTextColor}
+						/>
+					</div>
 				</div>
 				<div class="flex flex-col justify-center items-center">
 					<h1 class="text-2xl font-bold">Background</h1>
@@ -406,8 +414,12 @@
 			</div>
 			<footer class="flex flex-col justify-center items-center gap-2">
 				<p>Copyright © 2023 - {new Date().getFullYear()} - All Rights Reserved</p>
-				<p>Made with ❤️ by <a class="link link-primary" href="https://only-my.space/nano">nano</a></p>
-				<p>Join our <a class="link link-primary" href="https://discord.gg/SVsSQXf7HR">Discord</a></p>
+				<p>
+					Made with ❤️ by <a class="link link-primary" href="https://only-my.space/nano">nano</a>
+				</p>
+				<p>
+					Join our <a class="link link-primary" href="https://discord.gg/SVsSQXf7HR">Discord</a>
+				</p>
 			</footer>
 		</div>
 	</div>

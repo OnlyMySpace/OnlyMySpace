@@ -39,10 +39,7 @@ export interface UserProfile {
         songArtist: string;
     } | null;
     pronnouns: string | null; // This is an optional field so there are no breaking changes
-    cursor: {
-        cursor: string;
-        cursor_hover: string;
-    } | null // This is an optional field so there are no breaking changes
+    rainbowTextColor: boolean | null;
     /* @NOTE: For future me: From now on only add new fields if you know what you're doing and make it optional for backwards compatibility (its json not database you cant migrate it) */
 }
 
@@ -67,5 +64,5 @@ export let exampleProfile: UserProfile = {
     socials: [],
     textColor: '#fff',
     uname: '',
-    cursor: null
+    rainbowTextColor: false,
 }
