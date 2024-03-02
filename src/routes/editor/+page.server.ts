@@ -78,7 +78,6 @@ export const actions: Actions = {
         } else {
 
             // Use the migrate function to update the profile in case of any changes with the backend
-            console.log(profileData)
             if (profileData.musicPlayer && profileData.musicPlayer != null) {
                 profileData.widget = {
                     type: Widgets.Music,
@@ -86,7 +85,6 @@ export const actions: Actions = {
                 }
                 delete profileData.musicPlayer
                 console.log("Migrated the data successfully")
-                console.log(profileData.widget)
                 // Migrated the music player data to the widget
             }
 

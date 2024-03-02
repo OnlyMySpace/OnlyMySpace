@@ -349,22 +349,22 @@
 						<input
 							type="checkbox"
 							class="toggle toggle-primary"
-							checked={profile.musicPlayer != null}
-							on:change={() => {
-								if (profile.musicPlayer == null) {
-									profile.musicPlayer = {
+							checked={profile.widget != null && profile.widget.type == 'Music'}
+							on:change={() => {							
+								if (profile.widget != null && profile.widget.type == 'Music') {
+									profile.widget.widgetData = {
 										songName: '',
 										songArtist: '',
 										songUrl: '',
 										songCover: ''
 									};
 								} else {
-									profile.musicPlayer = null;
+									profile.widget = null;
 								}
 							}}
 						/>
 					</div>
-					{#if profile.musicPlayer != null}
+					{#if profile.widget != null && profile.widget.type == 'Music'}
 						<div class="flex flex-col justify-center items-center gap-2">
 							<div
 								class="flex flex-row justify-center items-center gap-2"
@@ -375,7 +375,7 @@
 									type="text"
 									placeholder="Name"
 									class="input w-full max-w-xs"
-									bind:value={profile.musicPlayer.songName}
+									bind:value={profile.widget.widgetData.songName}
 								/>
 							</div>
 							<div
@@ -387,7 +387,7 @@
 									type="text"
 									placeholder="Artist"
 									class="input w-full max-w-xs"
-									bind:value={profile.musicPlayer.songArtist}
+									bind:value={profile.widget.widgetData.songArtist}
 								/>
 							</div>
 							<div
@@ -400,7 +400,7 @@
 									type="text"
 									placeholder="Youtube link"
 									class="input w-full max-w-xs"
-									bind:value={profile.musicPlayer.songUrl}
+									bind:value={profile.widget.widgetData.songUrl}
 								/>
 							</div>
 						</div>
