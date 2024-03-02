@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import MusicPlayer from './widgets/MusicPlayer.svelte';
-	import type { FontOptions, UserProfile } from "$lib";
+	import type { UserProfile } from "$lib";
 	import UserCard from './profilesubcomp/UserCard.svelte';
 	import SocialMedias from './profilesubcomp/SocialMedias.svelte';
 	import { dev } from '$app/environment';

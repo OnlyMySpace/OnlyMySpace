@@ -1,7 +1,7 @@
 
 export enum Widgets {
     Music = 'Music',
-    Cube = 'Cube'
+    Cube = 'Cube',
 }
 export type MusicWidgetData = {
     songName: string;

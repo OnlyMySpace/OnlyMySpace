@@ -152,7 +152,6 @@
 	}
 
 	$: widgetVal = getWidgetVal();
-
 	let profile: UserProfile;
 	if (!data.profile) profile = exampleProfile;
 	else profile = data.profile;
@@ -379,6 +378,7 @@
 						<option disabled selected>Select a widget</option>
 						<option>Music Player</option>
 						<option>Cube</option>
+						<option>Spotify Current Track</option>
 						<option>None</option>
 					</select>
 				</div>
