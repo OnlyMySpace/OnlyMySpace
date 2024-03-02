@@ -1,6 +1,6 @@
 import { IMGKIT_ENDPOINT, PRIVATE_IMGKIT } from "$env/static/private";
 import { PUBLIC_IMGKIT } from "$env/static/public";
-import type { UserProfile } from "$lib";
+import { Widgets, type UserProfile } from "$lib";
 import { prisma } from "$lib/server/db";
 import { veirfyJWT } from "$lib/server/utils";
 import { redirect, type Actions, fail } from "@sveltejs/kit";
@@ -63,6 +63,7 @@ export const actions: Actions = {
             profileData.backgroundType = 'image'
             profileData.background = await uploadFile(bgimg as File, profileData, 'background', imgkit)
         }
+
         if (!hasProfile) {
             await prisma.userProfile.create({
                 data: {
@@ -75,6 +76,20 @@ export const actions: Actions = {
                 }
             })
         } else {
+
+            // Use the migrate function to update the profile in case of any changes with the backend
+            console.log(profileData)
+            if (profileData.musicPlayer && profileData.musicPlayer != null) {
+                profileData.widget = {
+                    type: Widgets.Music,
+                    widgetData: profileData.musicPlayer
+                }
+                delete profileData.musicPlayer
+                console.log("Migrated the data successfully")
+                console.log(profileData.widget)
+                // Migrated the music player data to the widget
+            }
+
             await prisma.userProfile.update({
                 where: {
                     id: uid.id

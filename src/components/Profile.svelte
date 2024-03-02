@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import MusicPlayer from './MusicPlayer.svelte';
-	import type { FontOptions, UserProfile } from '$lib';
+	import type { FontOptions, UserProfile, Widgets } from '$lib';
 	import UserCard from './profilesubcomp/UserCard.svelte';
 	import SocialMedias from './profilesubcomp/SocialMedias.svelte';
 	import { dev } from '$app/environment';
@@ -33,7 +33,7 @@
 		textColor: '#ffffff',
 		background:
 			'https://ik.imagekit.io/onlymyspace/0-background',
-		musicPlayer: null,
+		widget: null,
 		backgroundType: 'image',
 		rainbowTextColor: false
 	};
@@ -75,10 +75,11 @@
 			}
 			return;
 		}
-		if (profile.musicPlayer) {
+		// @FIXME: God save me
+		if (profile.widget && profile.widget.type == 'Music') {
 			let req = await fetch('/api/fetchYT', {
 				body: JSON.stringify({
-					songURL: profile.musicPlayer.songUrl
+					songURL: profile.widget.widgetData.songUrl
 				}),
 				method: 'POST'
 			});
@@ -86,15 +87,15 @@
 				let resp = await req.json();
 				if (resp && resp.url && resp.cover) {
 					musicPlayerData = {
-						songName: profile.musicPlayer.songName,
+						songName: profile.widget.widgetData.songName,
 						songUrl: resp.url,
-						songArtist: profile.musicPlayer.songArtist,
+						songArtist: profile.widget.widgetData.songArtist,
 						songCover: resp.cover
 					};
 					loadedMusicData = true;
 				}
 			} else {
-				profile.musicPlayer = null; // @FIXME: God save me	
+				profile.widget = null;
 				console.error('Failed to fetch music player data');
 				if(dev) {
 					console.error(await req.text());
@@ -137,10 +138,13 @@
 		<UserCard {profile} {badges}/>
 		<SocialMedias {profile} />
 		<p class="text-2xl font-bold text-center whitespace-pre-wrap">{profile.bio}</p>
+		{#if profile.widget}
+		{#if profile.widget.type == 'Music'}
 		<div>
+
 			{#if loadedMusicData}
 				<MusicPlayer {...musicPlayerData} />
-			{:else if profile.musicPlayer}
+			{:else}
 				<div class="card card-compact w-fit h-fit bg-base-100 shadow-xl skeleton">
 					<div class="flex justify-center">
 						<figure class="rounded-lg skeleton h-52 w-52"></figure>
@@ -153,6 +157,9 @@
 				</div>
 			{/if}
 		</div>
+		{/if}
+		{/if}
+		
 		<div class="fixed bottom-5 right-5 flex flex-row gap-2">
 			<span class="inline-flex gap-2">
 				<img class="w-6 h-6" src="/eye.svg" alt="Views" />
