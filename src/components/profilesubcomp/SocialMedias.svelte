@@ -3,7 +3,7 @@
 
 	export let profile: UserProfile;
 </script>
-<div class="flex justify-center gap-4 backdrop-blur-lg px-4 bg-base-100 bg-opacity-20 rounded-lg">
+<div class="flex justify-center gap-4 backdrop-blur-lg px-4 py-2 bg-base-100 bg-opacity-20 rounded-lg">
     {#each profile.socials as social}
         {#if social.type == 'handle'}
             <div class="tooltip" data-tip={social.value}>
