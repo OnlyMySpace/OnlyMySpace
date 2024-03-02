@@ -17,6 +17,7 @@ export type CubeWidgetData = {
 
 export type TimeWidgetData = {
     timezone: string;
+    displayTimezone: boolean;
 }
 
 export type WidgetData = MusicWidgetData | CubeWidgetData | TimeWidgetData; // | OtherWidgetData

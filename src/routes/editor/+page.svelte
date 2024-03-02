@@ -446,6 +446,10 @@
 						<div class="flex flex-col justify-center items-center gap-2">
 							<h1 class="text-2xl font-bold pb-4">Current Time</h1>
 							<input type="text" placeholder="Europe/Amsterdam" class="input w-full max-w-xs" bind:value={profile.widget.widgetData.timezone}>
+							<div class="flex flex-row justify-center items-center gap-2">
+								<label for="displayTimezone">Display Timezone</label>
+								<input type="checkbox" class="checkbox checkbox-primary" bind:checked={profile.widget.widgetData.displayTimezone}>
+							</div>
 						</div>
 					{/if}
 				{/if}

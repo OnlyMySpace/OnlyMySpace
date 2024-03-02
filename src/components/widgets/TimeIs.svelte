@@ -1,6 +1,6 @@
 <script lang="ts">
     export let timezone = "Europe/Budapest";
-
+    export let displayTimezone = false;
     let hours = "00";
     let mins = "00";
     let secs = "00";
@@ -26,5 +26,12 @@
 </script>
 
 <div id="clock" class="text-5xl font-bold text-center transition-all duration-500">
-    {hours} : {mins} : {secs}
+    <h1 class="text-5xl font-bold text-center transition-all duration-500">
+        {hours} : {mins} : {secs}
+    </h1>
+    {#if displayTimezone}
+    <h1 class="text-xl font-bold text-left transition-all duration-500">
+        {timezone}
+    </h1>
+    {/if}
 </div>

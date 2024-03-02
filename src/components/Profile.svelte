@@ -156,7 +156,7 @@
 		{:else if profile.widget.type == 'Cube'}
 			<Cube/>
 		{:else if profile.widget.type == 'Time'}
-			<TimeIs timezone={profile.widget.widgetData.timezone}/>
+			<TimeIs timezone={profile.widget.widgetData.timezone} displayTimezone={profile.widget.widgetData.displayTimezone}/>
 		{/if}
 		{/if}
 		
