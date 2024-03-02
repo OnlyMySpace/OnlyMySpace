@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { exampleProfile, type Social, type UserProfile } from '$lib';
+	import { Widgets, type DynamicWidget } from '$lib/widgets';
 	import type { PageData } from './$types';
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import { fade, fly } from 'svelte/transition';
@@ -118,6 +119,39 @@
 		// @ts-expect-error
 		reader.readAsDataURL(event.target.files[0]);
 	}
+
+	function handleSelect(ev: Event) {
+		if (!ev.target || (ev.target as HTMLSelectElement).value == null) return;
+		let target = ev.target as HTMLSelectElement;
+		let composed: DynamicWidget | null = null;
+		if (target.value == 'Music Player') {
+			composed = {
+				type: Widgets.Music,
+				widgetData: {}
+			};
+		} else if (target.value == 'Cube') {
+			composed = {
+				type: Widgets.Cube,
+				widgetData: {}
+			};
+		} else {
+			composed = null;
+		}
+		profile.widget = composed;
+	}
+
+	function getWidgetVal(): string {
+		let type = profile.widget?.type;
+		if (type == Widgets.Music) {
+			return 'Music Player';
+		} else if (type == Widgets.Cube) {
+			return 'Cube';
+		} else {
+			return 'None';
+		}
+	}
+
+	$: widgetVal = getWidgetVal();
 
 	let profile: UserProfile;
 	if (!data.profile) profile = exampleProfile;
@@ -338,74 +372,71 @@
 						{/each}
 					</div>
 				</div>
-				<div class="flex flex-col justify-center items-center gap-2">
-					<!-- Music player toggle -->
-					<h1 class="text-2xl font-bold pb-4">Music Player</h1>
-					<div
-						class="flex flex-row justify-center items-center gap-2"
-						transition:fade={{ duration: 200 }}
-					>
-						<label for="">Enable music player</label>
-						<input
-							type="checkbox"
-							class="toggle toggle-primary"
-							checked={profile.widget != null && profile.widget.type == 'Music'}
-							on:change={() => {							
-								if (profile.widget != null && profile.widget.type == 'Music') {
-									profile.widget.widgetData = {
-										songName: '',
-										songArtist: '',
-										songUrl: '',
-										songCover: ''
-									};
-								} else {
-									profile.widget = null;
-								}
-							}}
-						/>
-					</div>
-					{#if profile.widget != null && profile.widget.type == 'Music'}
+
+				<div class="py-4 flex flex-col justify-center items-center">
+					<h1 class="text-2xl font-bold pb-4">Widgets</h1>
+					<select bind:value={widgetVal} on:change={handleSelect} class="select w-full max-w-xs">
+						<option disabled selected>Select a widget</option>
+						<option>Music Player</option>
+						<option>Cube</option>
+						<option>None</option>
+					</select>
+				</div>
+
+				{#if profile.widget}
+					{#if profile.widget.type == 'Music'}
 						<div class="flex flex-col justify-center items-center gap-2">
-							<div
-								class="flex flex-row justify-center items-center gap-2"
-								transition:fade={{ duration: 200 }}
-							>
-								<label class="w-1/2" for="">Name</label>
-								<input
-									type="text"
-									placeholder="Name"
-									class="input w-full max-w-xs"
-									bind:value={profile.widget.widgetData.songName}
-								/>
-							</div>
-							<div
-								class="flex flex-row justify-center items-center gap-2"
-								transition:fade={{ duration: 200 }}
-							>
-								<label class="w-1/2" for="">Artist</label>
-								<input
-									type="text"
-									placeholder="Artist"
-									class="input w-full max-w-xs"
-									bind:value={profile.widget.widgetData.songArtist}
-								/>
-							</div>
-							<div
-								class="flex flex-row justify-center items-center gap-2"
-								transition:fade={{ duration: 200 }}
-							>
-								<!-- Audio file -->
-								<label class="w-1/2" for="">Youtube link</label>
-								<input
-									type="text"
-									placeholder="Youtube link"
-									class="input w-full max-w-xs"
-									bind:value={profile.widget.widgetData.songUrl}
-								/>
-							</div>
+							<!-- Music player toggle -->
+							<h1 class="text-2xl font-bold pb-4">Music Player</h1>
+							{#if profile.widget != null && profile.widget.type == 'Music'}
+								<div class="flex flex-col justify-center items-center gap-2">
+									<div
+										class="flex flex-row justify-center items-center gap-2"
+										transition:fade={{ duration: 200 }}
+									>
+										<label class="w-1/2" for="">Name</label>
+										<input
+											type="text"
+											placeholder="Name"
+											class="input w-full max-w-xs"
+											bind:value={profile.widget.widgetData.songName}
+										/>
+									</div>
+									<div
+										class="flex flex-row justify-center items-center gap-2"
+										transition:fade={{ duration: 200 }}
+									>
+										<label class="w-1/2" for="">Artist</label>
+										<input
+											type="text"
+											placeholder="Artist"
+											class="input w-full max-w-xs"
+											bind:value={profile.widget.widgetData.songArtist}
+										/>
+									</div>
+									<div
+										class="flex flex-row justify-center items-center gap-2"
+										transition:fade={{ duration: 200 }}
+									>
+										<!-- Audio file -->
+										<label class="w-1/2" for="">Youtube link</label>
+										<input
+											type="text"
+											placeholder="Youtube link"
+											class="input w-full max-w-xs"
+											bind:value={profile.widget.widgetData.songUrl}
+										/>
+									</div>
+								</div>
+							{/if}
+						</div>
+					{:else if profile.widget.type == 'Cube'}
+						<div class="flex flex-col justify-center items-center gap-2">
+							<h1 class="text-2xl font-bold pb-4">Cube</h1>
+							<p>Settings coming soon</p>
 						</div>
 					{/if}
-				</div>
+				{/if}
 				<button
 					type="submit"
 					class="btn-primary btn my-4 rounded-md"

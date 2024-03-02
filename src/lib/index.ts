@@ -1,3 +1,5 @@
+import { type DynamicWidget } from "./widgets";
+
 export interface Social {
     name: string;
     value: string;
@@ -16,24 +18,6 @@ export interface FontOptions {
     font_url: string, // URL to the TTF font (or when is_google_font is true, the name of the font eg 'Fira+Code')
     font_name: string, // like 'Roboto' or 'Noto Sans'
     font_alt: string // like sans-serif or monospace
-}
-
-export enum Widgets {
-    Music = 'Music',
-}
-
-type MusicWidgetData = {
-    songName: string;
-    songUrl: string;
-    songCover: string;
-    songArtist: string;
-}
-
-type WidgetData = MusicWidgetData // | OtherWidgetData
-
-export interface DynamicWidget {
-    type: Widgets,
-    widgetData: WidgetData
 }
 
 export interface UserProfile {

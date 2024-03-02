@@ -1,17 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import MusicPlayer from './MusicPlayer.svelte';
-	import type { FontOptions, UserProfile, Widgets } from '$lib';
+	import MusicPlayer from './widgets/MusicPlayer.svelte';
+	import type { FontOptions, UserProfile } from "$lib";
 	import UserCard from './profilesubcomp/UserCard.svelte';
 	import SocialMedias from './profilesubcomp/SocialMedias.svelte';
 	import { dev } from '$app/environment';
-
-	let fontA: FontOptions = {
-		font_alt: 'monospace',
-		font_name: 'Minecraft',
-		font_url: '/fonts/Minecraft.ttf',
-		is_google_font: false
-	};
+	import type { MusicWidgetData } from "$lib/widgets";
+	import Cube from './widgets/Cube.svelte';
 
 	let exampleProfile: UserProfile = {
 		id: 0,
@@ -75,11 +70,11 @@
 			}
 			return;
 		}
-		// @FIXME: God save me
 		if (profile.widget && profile.widget.type == 'Music') {
+			let widgetData: MusicWidgetData = profile.widget.widgetData as MusicWidgetData;
 			let req = await fetch('/api/fetchYT', {
 				body: JSON.stringify({
-					songURL: profile.widget.widgetData.songUrl
+					songURL: widgetData.songUrl
 				}),
 				method: 'POST'
 			});
@@ -87,9 +82,9 @@
 				let resp = await req.json();
 				if (resp && resp.url && resp.cover) {
 					musicPlayerData = {
-						songName: profile.widget.widgetData.songName,
+						songName: widgetData.songName,
 						songUrl: resp.url,
-						songArtist: profile.widget.widgetData.songArtist,
+						songArtist: widgetData.songArtist,
 						songCover: resp.cover
 					};
 					loadedMusicData = true;
@@ -157,6 +152,8 @@
 				</div>
 			{/if}
 		</div>
+		{:else if profile.widget.type == 'Cube'}
+			<Cube/>
 		{/if}
 		{/if}
 		

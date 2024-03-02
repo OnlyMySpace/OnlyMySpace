@@ -1,6 +1,7 @@
 import { IMGKIT_ENDPOINT, PRIVATE_IMGKIT } from "$env/static/private";
 import { PUBLIC_IMGKIT } from "$env/static/public";
-import { Widgets, type UserProfile } from "$lib";
+import { type UserProfile } from "$lib";
+import { Widgets } from "$lib/widgets";
 import { prisma } from "$lib/server/db";
 import { veirfyJWT } from "$lib/server/utils";
 import { redirect, type Actions, fail } from "@sveltejs/kit";
