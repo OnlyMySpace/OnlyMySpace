@@ -58,11 +58,11 @@ export const actions: Actions = {
             }
         })
         if (profileimg) {
-            profileData.pfp.url = await uploadFile(profileimg as File, profileData, 'profile', imgkit)
+            profileData.pfp.url = await uploadFile(profileimg as File, profileData, 'profile', imgkit) + '?updatedAt=0'
         }
         if (bgimg) {
             profileData.backgroundType = 'image'
-            profileData.background = await uploadFile(bgimg as File, profileData, 'background', imgkit)
+            profileData.background = await uploadFile(bgimg as File, profileData, 'background', imgkit) + '?updatedAt=0'
         }
 
         if (!hasProfile) {
@@ -107,7 +107,7 @@ async function uploadFile(file: File, profileData: UserProfile, suffix: string, 
         file: Buffer.from(buf),
         fileName: profileData.id.toString() + '-' + suffix,
         useUniqueFileName: false,
-        overwriteFile: true
+        overwriteFile: true,
     })
     return resp.url
 }

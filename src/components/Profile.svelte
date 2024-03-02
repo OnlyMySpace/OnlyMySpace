@@ -7,6 +7,7 @@
 	import { dev } from '$app/environment';
 	import type { MusicWidgetData } from "$lib/widgets";
 	import Cube from './widgets/Cube.svelte';
+	import TimeIs from './widgets/TimeIs.svelte';
 
 	let exampleProfile: UserProfile = {
 		id: 0,
@@ -154,6 +155,8 @@
 		</div>
 		{:else if profile.widget.type == 'Cube'}
 			<Cube/>
+		{:else if profile.widget.type == 'Time'}
+			<TimeIs timezone={profile.widget.widgetData.timezone}/>
 		{/if}
 		{/if}
 		

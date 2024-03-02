@@ -134,6 +134,11 @@
 				type: Widgets.Cube,
 				widgetData: {}
 			};
+		} else if (target.value == 'Current Time') {
+			composed = {
+				type: Widgets.Time,
+				widgetData: {}
+			};
 		} else {
 			composed = null;
 		}
@@ -146,6 +151,8 @@
 			return 'Music Player';
 		} else if (type == Widgets.Cube) {
 			return 'Cube';
+		} else if (type == Widgets.Time) {
+			return 'Current Time';
 		} else {
 			return 'None';
 		}
@@ -378,7 +385,7 @@
 						<option disabled selected>Select a widget</option>
 						<option>Music Player</option>
 						<option>Cube</option>
-						<option>Spotify Current Track</option>
+						<option>Current Time</option>
 						<option>None</option>
 					</select>
 				</div>
@@ -434,6 +441,11 @@
 						<div class="flex flex-col justify-center items-center gap-2">
 							<h1 class="text-2xl font-bold pb-4">Cube</h1>
 							<p>Settings coming soon</p>
+						</div>
+					{:else if profile.widget.type == 'Time'}
+						<div class="flex flex-col justify-center items-center gap-2">
+							<h1 class="text-2xl font-bold pb-4">Current Time</h1>
+							<input type="text" placeholder="Europe/Amsterdam" class="input w-full max-w-xs" bind:value={profile.widget.widgetData.timezone}>
 						</div>
 					{/if}
 				{/if}
