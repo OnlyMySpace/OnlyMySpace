@@ -1,5 +1,6 @@
 import { dev } from "$app/environment";
 import { SECRET_TURNSTILE_KEY } from "$env/static/private";
+import { blacklistedRegexes } from "$lib/server/utils";
 import { prisma } from "$lib/server/db";
 import { Prisma } from "@prisma/client";
 import { fail, type Actions } from "@sveltejs/kit";
@@ -68,6 +69,14 @@ export const actions: Actions = {
                 message: "Username cannot contain spaces",
                 success: false
             })
+        }
+        for (let i = 0; i < blacklistedRegexes.length; i++) {
+            if(username_form.toString().match(blacklistedRegexes[i])) {
+                return fail(400,{
+                    message: "Username contains blacklisted words",
+                    success: false
+                })
+            }           
         }
         const hashedPassword = await bcrypt.hash(password.toString(), 10)
         try {
