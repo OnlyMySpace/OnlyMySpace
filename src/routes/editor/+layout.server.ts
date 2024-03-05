@@ -3,6 +3,7 @@ import type { LayoutServerLoad } from './$types';
 import * as jose from 'jose';
 import { prisma } from '$lib/server/db';
 import { exampleProfile } from '$lib';
+import { JWT_SECRET } from '$env/static/private';
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
     let payload: jose.JWTPayload;
@@ -11,7 +12,7 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
         return redirect(302, '/auth/login');
     }
     try {
-        let temp = await jose.jwtVerify(jwt.toString(), new TextEncoder().encode(process.env.JWT_SECRET));
+        let temp = await jose.jwtVerify(jwt.toString(), new TextEncoder().encode(JWT_SECRET));
         payload = temp.payload;
         if (payload.exp && payload.exp < Date.now() / 1000) {
             return redirect(302, '/auth/login');
