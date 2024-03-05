@@ -3,6 +3,7 @@ export enum Widgets {
     Music = 'Music',
     Cube = 'Cube',
     Time = 'Time',
+    Quote = 'Quote',
 }
 export type MusicWidgetData = {
     songName: string;
@@ -20,7 +21,16 @@ export type TimeWidgetData = {
     displayTimezone: boolean;
 }
 
-export type WidgetData = MusicWidgetData | CubeWidgetData | TimeWidgetData; // | OtherWidgetData
+export type Quote = {
+    text: string;
+    author: string;
+}
+
+export type QuoteWidgetData = {
+    quotes: Quote[];
+}
+
+export type WidgetData = MusicWidgetData | CubeWidgetData | TimeWidgetData | QuoteWidgetData; // | OtherWidgetData
 
 export interface DynamicWidget {
     type: Widgets;

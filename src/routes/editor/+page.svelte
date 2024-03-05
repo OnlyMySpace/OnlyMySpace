@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { exampleProfile, type Social, type UserProfile } from '$lib';
-	import { Widgets, type DynamicWidget } from '$lib/widgets';
+	import { Widgets, type DynamicWidget, type Quote } from '$lib/widgets';
 	import type { PageData } from './$types';
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import { fade, fly } from 'svelte/transition';
@@ -139,6 +139,13 @@
 				type: Widgets.Time,
 				widgetData: {}
 			};
+		} else if(target.value == 'Quotes') {
+			composed = {
+				type: Widgets.Quote,
+				widgetData: {
+					quotes: []
+				}
+			};
 		} else {
 			composed = null;
 		}
@@ -153,9 +160,24 @@
 			return 'Cube';
 		} else if (type == Widgets.Time) {
 			return 'Current Time';
+		} else if (type == Widgets.Quote) {
+			return 'Quotes';
 		} else {
 			return 'None';
 		}
+	}
+
+	function addQuote() {
+		if (!profile.widget || !profile.widget.widgetData || !profile.widget.widgetData.quotes) return;
+		profile.widget.widgetData.quotes.push({
+			text: '',
+			author: ''
+		})
+	}
+
+	function removeQuote(quote: Quote) {
+		if (!profile.widget || !profile.widget.widgetData || !profile.widget.widgetData.quotes) return;
+		profile.widget.widgetData.quotes = profile.widget.widgetData.quotes.filter(q => q != quote);
 	}
 
 	$: widgetVal = getWidgetVal();
@@ -386,6 +408,7 @@
 						<option>Music Player</option>
 						<option>Cube</option>
 						<option>Current Time</option>
+						<option>Quotes</option>
 						<option>None</option>
 					</select>
 				</div>
@@ -449,6 +472,27 @@
 							<div class="flex flex-row justify-center items-center gap-2">
 								<label for="displayTimezone">Display Timezone</label>
 								<input type="checkbox" class="checkbox checkbox-primary" bind:checked={profile.widget.widgetData.displayTimezone}>
+							</div>
+						</div>
+					{:else if profile.widget.type == 'Quote'}
+						<div class="flex flex-col justify-center items-center gap-2">
+							<h1 class="text-2xl font-bold pb-4">Quotes</h1>
+							<!-- Make a list of quotes here -->
+							{#each profile.widget.widgetData.quotes as quote}
+								<div class="flex flex-row justify-center items-center gap-2">
+									<label class="w-1/2" for="">Quote</label>
+									<input type="text" placeholder="Quote" class="input w-full max-w-xs" bind:value={quote.text}>
+								</div>
+								<div class="flex flex-row justify-center items-center gap-2">
+									<label class="w-1/2" for="">Author</label>
+									<input type="text" placeholder="Author" class="input w-full max-w-xs" bind:value={quote.author}>
+								</div>
+								<div class="flex flex-row justify-center items-center gap-2">
+									<button type="button" class="btn-primary btn my-4 rounded-md" on:click={() => removeQuote(quote)}>Remove Quote</button>
+								</div>
+							{/each}
+							<div class="flex flex-row justify-center items-center gap-2">
+								<button type="button" class="btn-primary btn my-4 rounded-md" on:click={() => addQuote()}>Add Quote</button>
 							</div>
 						</div>
 					{/if}
