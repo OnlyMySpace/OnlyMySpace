@@ -31,7 +31,7 @@ export const actions: Actions = {
             const success = await validateToken(token.toString(), SECRET_TURNSTILE_KEY);            
             if (!success) {
                 return fail(400, {
-                    message: "Please complete the captcha [2]",
+                    message: "Please complete the captcha (Please disable your VPN or try again)",
                     success: false
                 })
             }

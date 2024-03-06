@@ -2,7 +2,7 @@ import { SECRET_RATELIMIT_KEY } from '$env/static/private';
 import * as jose from 'jose';
 import { RateLimiter } from "sveltekit-rate-limiter/server";
 
-export const blacklistedRegexes = ["f(@|a)gg(o|0)t","n(i|!)gg(3|a|e|@)r?",""]
+export const blacklistedRegexes = ["f(@|a)gg(o|0)t","n(i|!)gg(3|a|e|@)r?"]
 
 export const limiter = new RateLimiter({
     // A rate is defined as [number, unit]
