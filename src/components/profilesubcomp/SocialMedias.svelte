@@ -17,6 +17,7 @@
 
 	export let profile: UserProfile;
 </script>
+{#if profile.socials.length > 0}
 <div class="flex justify-center gap-4 backdrop-blur-lg px-4 py-2 bg-base-100 bg-opacity-20 rounded-lg">
     {#each profile.socials as social}
         {#if social.type == 'handle'}
@@ -30,3 +31,4 @@
         {/if}
     {/each}
 </div>
+{/if}
