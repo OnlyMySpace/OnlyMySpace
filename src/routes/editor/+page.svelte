@@ -401,6 +401,15 @@
 					</div>
 				</div>
 
+				<div class="py-4">
+					<h1 class="text-2xl font-bold pb-4">Profile <span class="text-primary animate-pulse">Effects</span></h1>
+					<select class="select w-full max-w-xs" bind:value={profile.profileEffect}>
+						<option disabled selected>Select an effect</option>
+						<option value="None">None</option>
+						<option value="Lava">Lava</option>
+					</select>
+				</div>
+
 				<div class="py-4 flex flex-col justify-center items-center">
 					<h1 class="text-2xl font-bold pb-4">Widgets</h1>
 					<select bind:value={widgetVal} on:change={handleSelect} class="select w-full max-w-xs">

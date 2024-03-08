@@ -39,6 +39,7 @@ export interface UserProfile {
     widget: DynamicWidget | null;
     pronnouns: string | null; // This is an optional field so there are no breaking changes
     rainbowTextColor: boolean | null;
+    profileEffect: string | null;
     /* @NOTE: For future me: From now on only add new fields if you know what you're doing and make it optional for backwards compatibility (its json not database you cant migrate it) */
 }
 
@@ -64,5 +65,6 @@ export let exampleProfile: UserProfile = {
     textColor: '#fff',
     uname: '',
     rainbowTextColor: false,
-    widget: null
+    widget: null,
+    profileEffect: null
 }

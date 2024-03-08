@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       animation: {
-        'rainbow': 'rainbow 10s ease-in-out infinite'
+        'rainbow': 'rainbow 10s ease-in-out infinite',
+        'flicker': 'flicker 1s infinite alternate'
       },
       keyframes: {
         rainbow: {
@@ -18,6 +19,16 @@ export default {
           '70%': { color: 'rgb(233,212,96)' },
           '80%': { color: 'rgb(243,156,18)' },
           '90%': { color: 'rgb(236,240,241)' },
+        },
+        flicker: {
+          '0%': {
+            opacity: 0.3,
+            "box-shadow": "0 0 20px 10px rgba(255, 69, 0, 0.7)"
+          },
+          '100%': {
+            opacity: 0.5,
+            "box-shadow": "0 0 15px 5px rgba(255, 69, 0, 0.5)"
+          }
         }
       }
     }

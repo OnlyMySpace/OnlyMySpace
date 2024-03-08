@@ -12,14 +12,18 @@
 	};
 
 </script>
-
-<img
-	style={`border-color: ${profile.pfp.border_color};`}
-	src={profile.pfp.url}
-	alt="Profile"
-	class="w-32 h-32 object-cover object-center top-3 rounded-full"
-	class:border-4={!profile.pfp.no_border}
-/>
+<div class="w-32 h-32 relative rounded-full overflow-hidden">
+	{#if profile.profileEffect && profile.profileEffect == "Lava"}
+	<div class="absolute w-full h-full opacity-30 rounded-lg bg-gradient-to-b from-red-500 via-orange-500 to-yellow-800 animate-flicker"></div>
+	{/if}
+	<img
+		style={`border-color: ${profile.pfp.border_color};`}
+		src={profile.pfp.url}
+		alt="Profile"
+		class="w-32 h-32 object-cover object-center top-3 rounded-full"
+		class:border-4={!profile.pfp.no_border}
+	/>
+</div>
 <h1 class="text-5xl font-bold text-center sm:pb-4 tooltip" class:animate-rainbow={profile.rainbowTextColor} data-tip={'ID ' + profile.id}>
 	{profile.uname}<span style="color: {profile.textColor}; opacity:0.65"
 		>{profile.pronnouns ? ' - ' + profile.pronnouns : ''}</span>
