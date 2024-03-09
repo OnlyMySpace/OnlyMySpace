@@ -22,11 +22,13 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
             cookies.delete('jwt',{
                 path: '/',
             });
-            return redirect(302, '/auth/login');
+            redirect(302, '/auth/login');
+            return;
         } else {
-            return fail(500, {
+            fail(500, {
                 "message": "Internal server error"
             })
+            return;
         }
     }
     if (!payload.email) {
