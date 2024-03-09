@@ -41,6 +41,13 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
             user: {
                 email: payload.email
             }
+        },
+        include: {
+            user: {
+                select: {
+                    badges: true
+                }
+            }
         }
     })
 
@@ -50,6 +57,7 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
         }
     }
     return {
-        profile: JSON.parse(profile.profile)
+        profile: JSON.parse(profile.profile),
+        badges: profile.user.badges
     }
 };

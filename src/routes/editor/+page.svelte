@@ -407,6 +407,9 @@
 						<option disabled selected>Select an effect</option>
 						<option value="None">None</option>
 						<option value="Lava">Lava</option>
+						{#if data.badges.includes('DONATOR')}
+						<option value="Money">Money</option>
+						{/if}
 					</select>
 				</div>
 
