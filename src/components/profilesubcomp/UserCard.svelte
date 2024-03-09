@@ -73,7 +73,7 @@
 <div class="w-52 h-32 relative overflow-hidden flex justify-center">
 	{#if profile.profileEffect && profile.profileEffect == 'Lava'}
 		<div
-			class="absolute w-full h-full opacity-30 rounded-lg bg-gradient-to-b from-red-500 via-orange-500 to-yellow-800 animate-flicker"
+			class="absolute w-32 h-32 rounded-full opacity-30 bg-gradient-to-b from-red-500 via-orange-500 to-yellow-800 animate-flicker"
 		></div>
 	{/if}
 
