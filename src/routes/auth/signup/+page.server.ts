@@ -69,6 +69,11 @@ export const actions: Actions = {
                 message: "Username cannot contain spaces",
                 success: false
             })
+        } else if (!RegExp("^[a-zA-Z0-9_]+$").test(username_form.toString())) {
+            return fail(400,{
+                message: "Username can only contain letters, numbers and underscores",
+                success: false
+            })
         }
         for (let i = 0; i < blacklistedRegexes.length; i++) {
             if(username_form.toString().match(blacklistedRegexes[i])) {
