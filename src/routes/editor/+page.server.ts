@@ -55,6 +55,11 @@ export const actions: Actions = {
                 user: {
                     id: uid.id
                 }
+            },
+            select: {
+                user: {
+                    select: {badges: true}
+                }
             }
         })
         if (profileimg) {
@@ -77,7 +82,11 @@ export const actions: Actions = {
                 }
             })
         } else {
-
+            if (profileData.profileEffect?.toLowerCase() == "money" && !hasProfile.user.badges.includes("DONATOR")) {
+                return fail(400, {
+                    message: "Bypassing the paywall isn't allowed. I'm sorry buddy"
+                })
+            }
             // Use the migrate function to update the profile in case of any changes with the backend
             if (profileData.musicPlayer && profileData.musicPlayer != null) {
                 profileData.widget = {
