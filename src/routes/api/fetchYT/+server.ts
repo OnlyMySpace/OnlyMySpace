@@ -25,7 +25,7 @@ export const POST: RequestHandler = async ({ request }) => {
             filter: "audioonly",
             quality: "highest",
         }).url;
-        var songCover = `https://i.ytimg.com/vi/${data.videoDetails.videoId}/maxresdefault.jpg`
+        var songCover = `https://i.ytimg.com/vi/${data.videoDetails.videoId}/sddefault.jpg`
     } catch (err) {
         return error(404, {
             message: "Song not found"
