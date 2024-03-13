@@ -67,7 +67,7 @@ export const actions: Actions = {
         }
         if (bgimg) {
             profileData.backgroundType = 'image'
-            profileData.background = await uploadFile(bgimg as File, profileData, 'background', imgkit) + '?updatedAt=0'
+            profileData.background = await uploadFile(bgimg as File, profileData, 'background', imgkit)
         }
 
         if (!hasProfile) {
