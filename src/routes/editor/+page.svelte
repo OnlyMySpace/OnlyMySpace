@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { exampleProfile, type Social, type UserProfile } from '$lib';
-	import { Widgets, type DynamicWidget, type Quote } from '$lib/widgets';
+	import { Widgets, type DynamicWidget, type Quote, type TimeWidgetData } from '$lib/widgets';
 	import type { PageData } from './$types';
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import { fade, fly } from 'svelte/transition';
@@ -139,7 +139,7 @@
 				type: Widgets.Time,
 				widgetData: {}
 			};
-		} else if(target.value == 'Quotes') {
+		} else if (target.value == 'Quotes') {
 			composed = {
 				type: Widgets.Quote,
 				widgetData: {
@@ -172,12 +172,30 @@
 		profile.widget.widgetData.quotes.push({
 			text: '',
 			author: ''
-		})
+		});
 	}
 
 	function removeQuote(quote: Quote) {
 		if (!profile.widget || !profile.widget.widgetData || !profile.widget.widgetData.quotes) return;
-		profile.widget.widgetData.quotes = profile.widget.widgetData.quotes.filter(q => q != quote);
+		profile.widget.widgetData.quotes = profile.widget.widgetData.quotes.filter((q) => q != quote);
+	}
+
+	let isTimeZoneValid: boolean;
+	$: isTimeZoneValid = profile.widget != null && profile.widget.type == 'Time' && profile.widget.widgetData != null && (profile.widget.widgetData as TimeWidgetData).timezone != undefined && validateTimezone({ target: { value: (profile.widget.widgetData as TimeWidgetData).timezone } });
+
+	function validateTimezone(ev: any): boolean {
+		if (!ev || !ev.target || !ev.target.value) {
+			return false;
+		}
+		try {
+			if (typeof ev.target.value != 'string') {
+				return false;
+			}
+			Intl.DateTimeFormat(undefined, { timeZone: ev.target.value });
+			return true;
+		} catch (ex) {
+			return false;
+		}
 	}
 
 	$: widgetVal = getWidgetVal();
@@ -402,13 +420,15 @@
 				</div>
 
 				<div class="py-4">
-					<h1 class="text-2xl font-bold pb-4">Profile <span class="text-primary animate-pulse">Effects</span></h1>
+					<h1 class="text-2xl font-bold pb-4">
+						Profile <span class="text-primary animate-pulse">Effects</span>
+					</h1>
 					<select class="select w-full max-w-xs" bind:value={profile.profileEffect}>
 						<option disabled selected>Select an effect</option>
 						<option value="None">None</option>
 						<option value="Lava">Lava</option>
 						{#if data.badges?.includes('DONATOR')}
-						<option value="Money">Money</option>
+							<option value="Money">Money</option>
 						{/if}
 					</select>
 				</div>
@@ -480,10 +500,21 @@
 					{:else if profile.widget.type == 'Time'}
 						<div class="flex flex-col justify-center items-center gap-2">
 							<h1 class="text-2xl font-bold pb-4">Current Time</h1>
-							<input type="text" placeholder="Europe/Amsterdam" class="input w-full max-w-xs" bind:value={profile.widget.widgetData.timezone}>
+							<input
+								type="text"
+								placeholder="Europe/Amsterdam"
+								class="input w-full max-w-xs"
+								class:input-error={!isTimeZoneValid}
+								class:input-success={isTimeZoneValid}
+								bind:value={profile.widget.widgetData.timezone}
+							/>
 							<div class="flex flex-row justify-center items-center gap-2">
 								<label for="displayTimezone">Display Timezone</label>
-								<input type="checkbox" class="checkbox checkbox-primary" bind:checked={profile.widget.widgetData.displayTimezone}>
+								<input
+									type="checkbox"
+									class="checkbox checkbox-primary"
+									bind:checked={profile.widget.widgetData.displayTimezone}
+								/>
 							</div>
 						</div>
 					{:else if profile.widget.type == 'Quote'}
@@ -493,18 +524,36 @@
 							{#each profile.widget.widgetData.quotes as quote}
 								<div class="flex flex-row justify-center items-center gap-2">
 									<label class="w-1/2" for="">Quote</label>
-									<input type="text" placeholder="Quote" class="input w-full max-w-xs" bind:value={quote.text}>
+									<input
+										type="text"
+										placeholder="Quote"
+										class="input w-full max-w-xs"
+										bind:value={quote.text}
+									/>
 								</div>
 								<div class="flex flex-row justify-center items-center gap-2">
 									<label class="w-1/2" for="">Author</label>
-									<input type="text" placeholder="Author" class="input w-full max-w-xs" bind:value={quote.author}>
+									<input
+										type="text"
+										placeholder="Author"
+										class="input w-full max-w-xs"
+										bind:value={quote.author}
+									/>
 								</div>
 								<div class="flex flex-row justify-center items-center gap-2">
-									<button type="button" class="btn-primary btn my-4 rounded-md" on:click={() => removeQuote(quote)}>Remove Quote</button>
+									<button
+										type="button"
+										class="btn-primary btn my-4 rounded-md"
+										on:click={() => removeQuote(quote)}>Remove Quote</button
+									>
 								</div>
 							{/each}
 							<div class="flex flex-row justify-center items-center gap-2">
-								<button type="button" class="btn-primary btn my-4 rounded-md" on:click={() => addQuote()}>Add Quote</button>
+								<button
+									type="button"
+									class="btn-primary btn my-4 rounded-md"
+									on:click={() => addQuote()}>Add Quote</button
+								>
 							</div>
 						</div>
 					{/if}
