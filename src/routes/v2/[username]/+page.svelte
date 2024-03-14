@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import UserCard from '$components/profilesubcomp/UserCard.svelte';
 	import SocialMedias from '$components/profilesubcomp/SocialMedias.svelte';
+	import WidgetRenderer from '$components/profilesubcomp/WidgetRenderer.svelte';
 	export let data: PageData;
 
 	let profile: UserProfile = JSON.parse(data.profile);
@@ -64,7 +65,7 @@
 				<SocialMedias {profile} />
 				<p class="text-2xl font-bold text-center whitespace-pre-wrap">{profile.bio}</p>
 
-				
+				<WidgetRenderer widget={profile.widget} />
 
 				<div class="fixed bottom-5 right-5 flex flex-row gap-2">
 					<span class="inline-flex gap-2">
