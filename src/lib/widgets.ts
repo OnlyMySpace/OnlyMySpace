@@ -1,4 +1,3 @@
-
 export enum Widgets {
     Music = 'Music',
     Cube = 'Cube',
@@ -30,9 +29,14 @@ export type QuoteWidgetData = {
     quotes: Quote[];
 }
 
-export type WidgetData = MusicWidgetData | CubeWidgetData | TimeWidgetData | QuoteWidgetData; // | OtherWidgetData
+export type WidgetDataMap = {
+    Music: MusicWidgetData;
+    Cube: CubeWidgetData;
+    Time: TimeWidgetData;
+    Quote: QuoteWidgetData;
+};
 
-export interface DynamicWidget {
-    type: Widgets;
-    widgetData: WidgetData;
-}
+export type DynamicWidget = {
+    type: keyof WidgetDataMap;
+    widgetData: WidgetDataMap[keyof WidgetDataMap];
+};
