@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import MusicPlayer from './widgets/MusicPlayer.svelte';
-	import type { UserProfile } from "$lib";
+	import type { UserProfile } from '$lib';
 	import UserCard from './profilesubcomp/UserCard.svelte';
 	import SocialMedias from './profilesubcomp/SocialMedias.svelte';
 	import { dev } from '$app/environment';
-	import type { MusicWidgetData } from "$lib/widgets";
+	import type { MusicWidgetData } from '$lib/widgets';
 	import Cube from './widgets/Cube.svelte';
 	import TimeIs from './widgets/TimeIs.svelte';
 	import Quote from './widgets/Quote.svelte';
@@ -28,11 +28,11 @@
 		socials: [{ icon: '/socials/discord.svg', name: 'discord', type: 'handle', value: 'im_nano' }],
 		pronnouns: 'Any pronnouns',
 		textColor: '#ffffff',
-		background:
-			'https://ik.imagekit.io/onlymyspace/0-background',
+		background: 'https://ik.imagekit.io/onlymyspace/0-background',
 		widget: null,
 		backgroundType: 'image',
-		rainbowTextColor: false
+		rainbowTextColor: false,
+		profileEffect: null,
 	};
 
 	export let profile: UserProfile = exampleProfile;
@@ -94,7 +94,7 @@
 			} else {
 				profile.widget = null;
 				console.error('Failed to fetch music player data');
-				if(dev) {
+				if (dev) {
 					console.error(await req.text());
 					console.error(req.status);
 				}
@@ -132,38 +132,39 @@
 	<div
 		class="flex flex-col justify-center items-center gap-3 h-screen w-screen rounded-lg shadow-2xl backdrop-blur-sm lg:w-1/2 lg:h-fit lg:py-10"
 	>
-		<UserCard {profile} {badges}/>
+		<UserCard {profile} {badges} />
 		<SocialMedias {profile} />
 		<p class="text-2xl font-bold text-center whitespace-pre-wrap">{profile.bio}</p>
 		{#if profile.widget}
-		{#if profile.widget.type == 'Music'}
-		<div>
-
-			{#if loadedMusicData}
-				<MusicPlayer {...musicPlayerData} />
-			{:else}
-				<div class="card card-compact w-fit h-fit bg-base-100 shadow-xl skeleton">
-					<div class="flex justify-center">
-						<figure class="rounded-lg skeleton h-52 w-52"></figure>
-					</div>
-					<div class="card-body w-60">
-						<div class="h-6 skeleton rounded-md w-3/4 mb-4"></div>
-						<div class="h-4 skeleton rounded-md w-1/2 mb-4"></div>
-						<div class="h-3 skeleton rounded-md w-1/3"></div>
-					</div>
+			{#if profile.widget.type == 'Music'}
+				<div>
+					{#if loadedMusicData}
+						<MusicPlayer {...musicPlayerData} />
+					{:else}
+						<div class="card card-compact w-fit h-fit bg-base-100 shadow-xl skeleton">
+							<div class="flex justify-center">
+								<figure class="rounded-lg skeleton h-52 w-52"></figure>
+							</div>
+							<div class="card-body w-60">
+								<div class="h-6 skeleton rounded-md w-3/4 mb-4"></div>
+								<div class="h-4 skeleton rounded-md w-1/2 mb-4"></div>
+								<div class="h-3 skeleton rounded-md w-1/3"></div>
+							</div>
+						</div>
+					{/if}
 				</div>
+			{:else if profile.widget.type == 'Cube'}
+				<Cube />
+			{:else if profile.widget.type == 'Time'}
+				<TimeIs
+					timezone={profile.widget.widgetData.timezone}
+					displayTimezone={profile.widget.widgetData.displayTimezone}
+				/>
+			{:else if profile.widget.type == 'Quote'}
+				<Quote {...profile.widget.widgetData} />
 			{/if}
-		</div>
-		{:else if profile.widget.type == 'Cube'}
-			<Cube/>
-		{:else if profile.widget.type == 'Time'}
-			<TimeIs timezone={profile.widget.widgetData.timezone} displayTimezone={profile.widget.widgetData.displayTimezone}/>
-		
-		{:else if profile.widget.type == 'Quote'}
-			<Quote {...profile.widget.widgetData}/>
 		{/if}
-		{/if}
-		
+
 		<div class="fixed bottom-5 right-5 flex flex-row gap-2">
 			<span class="inline-flex gap-2">
 				<img class="w-6 h-6" src="/eye.svg" alt="Views" />
