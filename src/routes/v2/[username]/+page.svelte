@@ -73,7 +73,7 @@
 						{data.views}
 					</span>
 				</div>
-				<p class="text-center text-sm">Hey, if you find any issues please <a href="/contact">tell us</a>! (You are participating in A/B testing)</p>
+				<p class="text-center text-sm">Hey, if you find any issues please <a class="link link-primary" href="/contact">tell us</a>! (You are participating in A/B testing)</p>
 			</div>
 		</div>
 	</div>
