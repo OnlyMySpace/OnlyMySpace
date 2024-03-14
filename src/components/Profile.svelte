@@ -39,12 +39,7 @@
 	export let views: number = 0;
 	export let badges: string[] = [];
 
-	let bgStyle: string;
-	if (profile.backgroundType == 'image') {
-		bgStyle = `background-image: url('${profile.background}')`;
-	} else {
-		bgStyle = `background-color: ${profile.background}`;
-	}
+	let bgStyle = profile.backgroundType == 'image' ? `background-image: url('${profile.background}')` : `background-color: ${profile.background}`;
 
 	let musicPlayerData: {
 		songName: string;
@@ -109,6 +104,7 @@
 			});
 		}, 1500);
 	});
+
 </script>
 
 <svelte:head>
