@@ -55,7 +55,7 @@
 	{/if}
 	<div class:blur-lg={data.blacklisted}>
 		<div
-			style={`font-family: ${profile.font.font_name}, ${profile.font.font_alt}; color: ${profile.textColor};${bgStyle}`}
+			style={`font-family: ${profile.font.font_name}, font-display: swap, ${profile.font.font_alt}; color: ${profile.textColor};${bgStyle}`}
 			class="flex items-center justify-center h-screen w-screen bg-no-repeat bg-center bg-cover"
 		>
 			<div
