@@ -1,9 +1,14 @@
 import { prisma } from "$lib/server/db";
-import { error } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 import { limiter } from "$lib/server/utils";
 
 export const load: LayoutServerLoad = async (event) => {
+    // 20% chance of being B (v2 tester)
+    if (Math.random() < 0.1) {
+        redirect(302, '/v2/' + event.params.username);
+        return;
+    }
     await limiter.cookieLimiter?.preflight(event);
     const profile = await prisma.userProfile.findFirst({
         where: {
