@@ -57,10 +57,10 @@
 	let poll = false;
 
 	let badgeMap: { [key: string]: string } = {
-		OG: '/badges/OG.png',
-		ADMIN: '/badges/ADMIN.png',
-		DONATOR: '/badges/DONATOR.png',
-		VERIFIED: '/badges/VERIFIED.png'
+		OG: '/badges/OG.avif',
+		ADMIN: '/badges/ADMIN.avif',
+		DONATOR: '/badges/DONATOR.avif',
+		VERIFIED: '/badges/VERIFIED.avif'
 	};
 
 	let onParticlesLoaded = (event) => {
