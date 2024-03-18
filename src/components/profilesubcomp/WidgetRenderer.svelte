@@ -43,7 +43,7 @@
 		}
     })
 </script>
-
+{#each [widget] as widget}
 {#if widget}
 	{#if widget.type == 'Music'}
 		<div>
@@ -73,3 +73,4 @@
 		<Quote {...widget.widgetData} />
 	{/if}
 {/if}
+{/each}

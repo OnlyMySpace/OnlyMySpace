@@ -1,5 +1,5 @@
 import { prisma } from "$lib/server/db";
-import { error } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 import { limiter } from "$lib/server/utils";
 
@@ -25,7 +25,6 @@ export const load: LayoutServerLoad = async (event) => {
             message: "User not found",
         })
     }
-
     return {
         profile: profile.profile,
         views: profile.views,
