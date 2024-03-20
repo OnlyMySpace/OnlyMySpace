@@ -44,9 +44,9 @@
 
 {#if $profileStore != null}
 	{#if updatedProfile}
-		<div class="fixed top-0 left-1/2 -translate-x-1/2 z-50" transition:fly|local={{ y: -100 }}>
+		<div class="fixed top-0 left-1/2 -translate-x-1/2 z-[100]" transition:fly|local={{ y: -100 }}>
 			<div
-				class="flex flex-row justify-center w-96 h-16 items-center gap-2 border-solid bg-opacity-80 backdrop-blur-md bg-gray-700 rounded-lg"
+				class="flex flex-row justify-center w-96 h-16 items-center gap-2 border-solid border-green-500 border-2 backdrop-blur-md bg-transparent rounded-lg"
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 					><path

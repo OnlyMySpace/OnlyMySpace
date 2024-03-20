@@ -22,8 +22,8 @@ export const actions: Actions = {
         }
         let email = jwt.payload.email as string
         let formData = await request.formData()
-        let profileimg = formData.get('profile-img')
-        let bgimg = formData.get('background-img')
+        let profileimg = formData.get('profile-image')
+        let bgimg = formData.get('background-image')
         let imgkit = new ImageKit({
             privateKey: PRIVATE_IMGKIT,
             publicKey: PUBLIC_IMGKIT,
