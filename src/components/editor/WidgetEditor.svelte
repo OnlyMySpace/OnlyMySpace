@@ -3,9 +3,6 @@
 	import { Widgets, type DynamicWidget } from '$lib/widgets';
 	import { profileStore } from '$lib/stores';
 	import { SvelteComponent, type ComponentType } from 'svelte';
-	import Time from './WidgetSettings/Time.svelte';
-	import MusicPlayer from './WidgetSettings/MusicPlayer.svelte';
-
 	let wmap = {
 		'Music Player': Widgets.Music,
 		Cube: Widgets.Cube,
@@ -14,9 +11,10 @@
 		None: null
 	};
 
-	let settingsMap: { [key: string]: ComponentType<SvelteComponent<{}>> } = {
-		'Current Time': Time,
-		'Music Player': MusicPlayer,
+	let settingsMap: { [key: string]: string} = {
+		'Current Time': "Time.svelte",
+		'Music Player': "MusicPlayer.svelte",
+		'Quotes': "Quotes.svelte"
 	};
 
 	$: widgetVal = widgetToValue($profileStore ? $profileStore.widget : null);
@@ -59,7 +57,9 @@
 			for="widgetsettings">Settings</label
 		>
 		{#if widgetVal != 'None' && settingsMap[widgetVal] != undefined}
-			<svelte:component this={settingsMap[widgetVal]} />
+			{#await import(/* @vite-ignore */ "./WidgetSettings/" + settingsMap[widgetVal]) then { default: C }}
+				<svelte:component this={C} />
+			{/await}
 		{:else}
 			<p class="text-white/50">No settings for this widget</p>
 		{/if}
