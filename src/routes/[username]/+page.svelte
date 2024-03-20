@@ -6,6 +6,7 @@
 	import UserCard from '$components/profilesubcomp/UserCard.svelte';
 	import SocialMedias from '$components/profilesubcomp/SocialMedias.svelte';
 	import WidgetRenderer from '$components/profilesubcomp/WidgetRenderer.svelte';
+	import { dev } from '$app/environment';
 	export let data: PageData;
 
 	let profile: UserProfile = JSON.parse(data.profile);
@@ -21,14 +22,20 @@
 		}
 	}
 
-	async function handleView() {
-		setTimeout(() => {
-			fetch('/api/views', {
+	function handleView() {
+		setTimeout( async () => {
+			try {
+			await fetch('/api/views', {
 				body: JSON.stringify({
 					id: profile.id
 				}),
 				method: 'POST'
 			});
+		} catch (e) {
+			if (dev) {
+				console.error(e);
+			}
+		}
 		}, 1500);
 	}
 
