@@ -11,11 +11,17 @@
 		None: null
 	};
 
-	let settingsMap: { [key: string]: string} = {
-		'Current Time': "Time.svelte",
-		'Music Player': "MusicPlayer.svelte",
-		'Quotes': "Quotes.svelte"
-	};
+	async function renderWidget(name: string): Promise<ComponentType<SvelteComponent>> {
+		if (name == 'Music Player') {
+			return (await import('./WidgetSettings/MusicPlayer.svelte')).default;
+		} else if (name == 'Current Time') {
+			return (await import('./WidgetSettings/Time.svelte')).default;
+		} else if (name == 'Quotes') {
+			return (await import('./WidgetSettings/Quotes.svelte')).default;
+		}
+		// unreachable
+		return (await import('./WidgetSettings/None.svelte')).default;
+	}
 
 	$: widgetVal = widgetToValue($profileStore ? $profileStore.widget : null);
 
@@ -56,8 +62,8 @@
 			class="label text-white text-xl font-bold"
 			for="widgetsettings">Settings</label
 		>
-		{#if widgetVal != 'None' && settingsMap[widgetVal] != undefined}
-			{#await import(/* @vite-ignore */ "./WidgetSettings/" + settingsMap[widgetVal]) then { default: C }}
+		{#if widgetVal != 'None'}
+			{#await renderWidget(widgetVal) then C}
 				<svelte:component this={C} />
 			{/await}
 		{:else}
