@@ -8,7 +8,7 @@
 	import { onMount } from 'svelte';
 
 	export let widget: DynamicWidget | null; // @TODO: & FIXME: Do something about it being deprecated in the future (refer to UserProfile) 
-	export let widgets: DynamicWidget[] = [];
+	export let widgets: DynamicWidget[] = widget ? [widget] : [];
 	let musicPlayerData: MusicWidgetData;
 	let loadedMusicData = false;
 

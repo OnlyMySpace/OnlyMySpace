@@ -1,12 +1,7 @@
 <script lang="ts">
 	import Loading from '$components/Loading.svelte';
-	import { profileStore } from '$lib/stores';
+	import { assetsStore, profileStore } from '$lib/stores';
 	import ColorPicker from 'svelte-awesome-color-picker';
-
-	let temporaryAssets: { [key: string]: File | null } = {
-		'profile-image': null,
-		'background-image': null
-	};
 
 	function handleProfilePictureChange(e: Event) {
 		let reader = new FileReader();
@@ -16,7 +11,7 @@
 		}
 		reader.onload = () => {
 			if (target != null && target.files != null && target.files.length > 0) {
-				temporaryAssets['profile-image'] = target.files[0] ? target.files[0] : null;
+				$assetsStore['profile-image'] = target.files[0] ? target.files[0] : null;
 			}
 		};
 	}
@@ -35,7 +30,7 @@
 		}
 		reader.onload = () => {
 			if (target != null && target.files != null && target.files.length > 0) {
-				temporaryAssets['background-image'] = target.files[0] ? target.files[0] : null;
+				$assetsStore['background-image'] = target.files[0] ? target.files[0] : null;
 			}
 		};
 	}
@@ -81,12 +76,12 @@
 		{#if !$profileStore.pfp.no_border}
 			<ColorPicker label="Border Color" bind:hex={$profileStore.pfp.border_color} />
 		{/if}
-		{#if temporaryAssets['profile-image']}
+		{#if $assetsStore['profile-image']}
 			<label for="img" class="label text-white text-xl font-bold">Preview</label>
 			<img
 				class="h-32 w-32 rounded-full object-cover object-center"
 				alt="Profile preview"
-				src={URL.createObjectURL(temporaryAssets['profile-image'])}
+				src={URL.createObjectURL($assetsStore['profile-image'])}
 			/>
 		{/if}
 	</div>

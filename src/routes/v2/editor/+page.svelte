@@ -4,8 +4,9 @@
 	import LittleThings from '$components/editor/LittleThings.svelte';
 	import WidgetEditor from '$components/editor/WidgetEditor.svelte';
 	import { exampleProfile } from '$lib';
-	import { profileStore } from '$lib/stores';
+	import { assetsStore, profileStore } from '$lib/stores';
 	import type { PageData } from './$types';
+	import { fly } from 'svelte/transition';
 
 	const options = ['Basic', 'The Little Things & Socials', 'Widgets'];
 	let selected = options[0];
@@ -14,8 +15,26 @@
 	else profileStore.set(data.profile);
 	let badges = data.badges;
 
-	function updateProfile() {
-		console.log($profileStore);
+	let updatedProfile = false;
+
+	async function updateProfile() {
+		if ($profileStore == null) return;
+		let fdata = new FormData();
+		for (let key in $assetsStore) {
+			let f = $assetsStore[key];
+			if (f) fdata.append(key, f);
+		}
+		fdata.append('profile', JSON.stringify($profileStore));
+		let res = await fetch(window.location.href, {
+			method: 'POST',
+			body: fdata
+		});
+		if (res.status == 200) {
+			updatedProfile = true;
+			setTimeout(() => {
+				updatedProfile = false;
+			}, 3000);
+		}
 	}
 </script>
 
@@ -24,6 +43,21 @@
 </svelte:head>
 
 {#if $profileStore != null}
+	{#if updatedProfile}
+		<div class="fixed top-0 left-1/2 -translate-x-1/2 z-50" transition:fly|local={{ y: -100 }}>
+			<div
+				class="flex flex-row justify-center w-96 h-16 items-center gap-2 border-solid bg-opacity-80 backdrop-blur-md bg-gray-700 rounded-lg"
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+					><path
+						class="fill-green-500"
+						d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"
+					/></svg
+				>
+				<p class="text-1xl font-bold">Successfully updated your profile</p>
+			</div>
+		</div>
+	{/if}
 	<div role="tablist" class="tabs tabs-bordered h-16 lg:h-10 backdrop-blur-lg sticky top-0 z-50">
 		{#each options as option}
 			<button
