@@ -36,7 +36,8 @@ export interface UserProfile {
         songCover: string;
         songArtist: string;
     } | null;
-    widget: DynamicWidget | null;
+    widget: DynamicWidget | null; // @TODO: Deceprate this fully @FIXME: This is deprecated as nullable
+    widgets: DynamicWidget[]; // not nullable because its an array
     pronnouns: string | null; // This is an optional field so there are no breaking changes
     rainbowTextColor: boolean | null;
     profileEffect: string | null;
@@ -66,5 +67,6 @@ export let exampleProfile: UserProfile = {
     uname: '',
     rainbowTextColor: false,
     widget: null,
+    widgets: [],
     profileEffect: null
 }

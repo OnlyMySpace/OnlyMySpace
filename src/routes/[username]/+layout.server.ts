@@ -1,7 +1,7 @@
 import { prisma } from "$lib/server/db";
 import { error } from "@sveltejs/kit";
-import type { LayoutServerLoad } from "../../[username]/$types";
 import { limiter } from "$lib/server/utils";
+import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = async (event) => {
     await limiter.cookieLimiter?.preflight(event);

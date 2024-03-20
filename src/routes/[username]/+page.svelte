@@ -50,7 +50,7 @@
 <div>
 	{#if data.blacklisted}
 		<h1 class="text-3xl font-bold top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute z-10">
-			This user is blacklisted
+			Uh Oh! This user is blacklisted
 		</h1>
 	{/if}
 	<div class:blur-lg={data.blacklisted}>
@@ -65,7 +65,7 @@
 				<SocialMedias {profile} />
 				<p class="text-2xl font-bold text-center whitespace-pre-wrap">{profile.bio}</p>
 
-				<WidgetRenderer widget={profile.widget} />
+				<WidgetRenderer widget={profile.widget} widgets={profile.widgets} />
 
 				<div class="fixed bottom-5 right-5 flex flex-row gap-2">
 					<span class="inline-flex gap-2">

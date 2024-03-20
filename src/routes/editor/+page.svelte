@@ -234,7 +234,7 @@
 			<div class="flex flex-col justify-center items-center">
 				<div class="flex flex-col justify-center items-center gap-2">
 					<h1 class="text-2xl font-bold pb-4">The important stuff!</h1>
-					<!-- This part is for pfp, username, pronnouns and bio -->
+					<!-- This part is for pfp, username, pronouns and bio -->
 					<input
 						type="text"
 						class="input w-full max-w-xs"

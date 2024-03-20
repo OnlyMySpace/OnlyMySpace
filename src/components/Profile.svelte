@@ -26,7 +26,7 @@
 		},
 		uname: 'nano',
 		socials: [{ icon: '/socials/discord.svg', name: 'discord', type: 'handle', value: 'im_nano' }],
-		pronnouns: 'Any pronnouns',
+		pronnouns: 'Any pronouns',
 		textColor: '#ffffff',
 		background: 'https://ik.imagekit.io/onlymyspace/0-background',
 		widget: null,
