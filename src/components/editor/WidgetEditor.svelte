@@ -4,32 +4,34 @@
 	import { profileStore } from '$lib/stores';
 	import { SvelteComponent, type ComponentType } from 'svelte';
 	import Time from './WidgetSettings/Time.svelte';
-
-	export let updateProfile = () => {};
+	import MusicPlayer from './WidgetSettings/MusicPlayer.svelte';
 
 	let wmap = {
 		'Music Player': Widgets.Music,
 		Cube: Widgets.Cube,
 		'Current Time': Widgets.Time,
-		Quotes: Widgets.Quote
+		Quotes: Widgets.Quote,
+		None: null
 	};
 
 	let settingsMap: { [key: string]: ComponentType<SvelteComponent<{}>> } = {
-		'Current Time': Time
+		'Current Time': Time,
+		'Music Player': MusicPlayer,
 	};
 
 	$: widgetVal = widgetToValue($profileStore ? $profileStore.widget : null);
 
 	function widgetToValue(widget: DynamicWidget | null): string {
 		if (!widget) return 'None';
-		return Object.keys(wmap).find((k) => wmap[k as keyof typeof wmap] === widget.type) ?? 'None';
+
+		return Object.keys(wmap).find((w) => wmap[w as keyof typeof wmap] === widget.type) ?? 'None';
 	}
 
 	function handleSelect(ev: Event) {
 		if (!ev.target || (ev.target as HTMLSelectElement).value == null || !$profileStore) return;
 		let target = ev.target as HTMLSelectElement;
 		$profileStore.widget = {
-			type: Object.keys(wmap).find((w) => w == target.value) as Widgets,
+			type: wmap[target.value as keyof typeof wmap] as DynamicWidget['type'],
 			widgetData: {}
 		};
 	}
@@ -45,11 +47,9 @@
 			bind:value={widgetVal}
 		>
 			<option disabled selected>Select a widget</option>
-			<option>Music Player</option>
-			<option>Cube</option>
-			<option>Current Time</option>
-			<option>Quotes</option>
-			<option>None</option>
+			{#each Object.keys(wmap) as widget}
+				<option class="text-black" value={widget}>{widget}</option>
+			{/each}
 		</select>
 	</div>
 	<div class="grouped">
@@ -58,8 +58,10 @@
 			class="label text-white text-xl font-bold"
 			for="widgetsettings">Settings</label
 		>
-		{#if widgetVal != 'None'}
+		{#if widgetVal != 'None' && settingsMap[widgetVal] != undefined}
 			<svelte:component this={settingsMap[widgetVal]} />
+		{:else}
+			<p class="text-white/50">No settings for this widget</p>
 		{/if}
 	</div>
 {:else}
