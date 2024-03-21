@@ -85,7 +85,7 @@
 			class="btn bg-[rgba(255,255,255,0.1)] max-w-xs w-32 shadow-lg shadow-[rgba(0,0,0,0.1)] backdrop-blur-lg border-2 border-solid border-[rgba(255,255,255,0.3)] my-4 rounded-md"
 			>Save</button
 		>
-		<footer class="flex flex-col justify-center items-center gap-2 p-4">
+		<footer class="flex flex-col justify-center items-center gap-2 p-4 bg-[rgba(0,0,0,0.2)] backdrop-blur-lg bg-opacity-80 rounded-lg">
 			<p>Copyright © 2023 - {new Date().getFullYear()} - All Rights Reserved</p>
 			<p>
 				Made with ❤️ by <a class="link link-primary" href="https://only-my.space/nano">nano</a>

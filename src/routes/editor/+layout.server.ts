@@ -6,6 +6,9 @@ import { exampleProfile } from '$lib';
 import { JWT_SECRET } from '$env/static/private';
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
+    if (Math.random() < 0.1) {
+        return redirect(302,'/v2/editor')
+    }
     let payload: jose.JWTPayload;
     const jwt = cookies.get('jwt');
     if (!jwt) {
