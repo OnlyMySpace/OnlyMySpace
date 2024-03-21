@@ -44,7 +44,7 @@
 		bind:value={$profileStore.uname}
 	/>
 	<textarea
-		class="textarea w-full max-w-xs"
+		class="textarea w-full max-w-xs min-h-32"
 		placeholder="Bio"
 		rows="3"
 		bind:value={$profileStore.bio}
