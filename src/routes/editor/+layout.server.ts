@@ -1,14 +1,11 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { LayoutServerLoad } from './$types';
+import type { LayoutServerLoad } from '../../editor/$types';
 import * as jose from 'jose';
 import { prisma } from '$lib/server/db';
 import { exampleProfile } from '$lib';
 import { JWT_SECRET } from '$env/static/private';
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
-    if (Math.random() < 0.1) {
-        return redirect(302,'/v2/editor')
-    }
     let payload: jose.JWTPayload;
     const jwt = cookies.get('jwt');
     if (!jwt) {

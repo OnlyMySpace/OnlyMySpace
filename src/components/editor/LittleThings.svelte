@@ -108,10 +108,10 @@
 
 	<div class="grouped gap-2">
 		<label for="profile" class="label text-white text-xl font-bold">Profile Effects</label>
-		<select class="select select-ghost w-full max-w-xs" bind:value={$profileStore.profileEffect}>
-			<option disabled selected>Select an effect</option>
-			<option value="None">None</option>
-			<option value="Lava">Lava</option>
+		<select class="select select-ghost w-full max-w-xs text-black" bind:value={$profileStore.profileEffect}>
+			<option class="text-black" disabled selected>Select an effect</option>
+			<option class="text-black" value="None">None</option>
+			<option class="text-black" value="Lava">Lava</option>
 			{#if badges.includes('DONATOR')}
 				<option value="Money">Money</option>
 			{/if}
