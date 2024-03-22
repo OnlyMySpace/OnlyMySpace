@@ -26,7 +26,7 @@
             </div>
         {:else}
             <a href={socialUrlMap[social.icon.split('.')[0].split('/')[2]] + social.value} class="tooltip" data-tip={social.name}>
-                <img class="w-6 h-6" src={social.icon} alt={social.name} />
+                <img class="w-6 h-6" class:w-8={social.icon.split('.')[0].split('/')[2] == 'youtube'} src={social.icon} alt={social.name} />
             </a>
         {/if}
     {/each}
