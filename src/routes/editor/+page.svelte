@@ -42,50 +42,65 @@
 	<title>Editor - OnlyMySpace</title>
 </svelte:head>
 
-{#if $profileStore != null}
-	{#if updatedProfile}
-		<div class="fixed top-0 left-1/2 -translate-x-1/2 z-[100]" transition:fly|local={{ y: -100 }}>
-			<div
-				class="flex flex-row justify-center w-96 h-16 items-center gap-2 border-solid border-green-500 border-2 backdrop-blur-md bg-transparent rounded-lg"
-			>
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-					><path
-						class="fill-green-500"
-						d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"
-					/></svg
+<div class="wrapper">
+	{#if $profileStore != null}
+		{#if updatedProfile}
+			<div class="fixed top-0 left-1/2 -translate-x-1/2 z-[100]" transition:fly|local={{ y: -100 }}>
+				<div
+					class="flex flex-row justify-center w-96 h-16 items-center gap-2 border-solid border-green-500 border-2 backdrop-blur-md bg-transparent rounded-lg"
 				>
-				<p class="text-1xl font-bold">Successfully updated your profile</p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+						><path
+							class="fill-green-500"
+							d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"
+						/></svg
+					>
+					<p class="text-1xl font-bold">Successfully updated your profile</p>
+				</div>
 			</div>
-		</div>
-	{/if}
-	<div role="tablist" class="tabs tabs-bordered h-16 lg:h-10 backdrop-blur-lg sticky top-0 z-50">
-		{#each options as option}
-			<button
-				role="tab"
-				aria-selected={option === selected}
-				class="tab tab-bordered text-white hover:text-white/50 text-xl font-bold bg-black bg-opacity-20 h-16 lg:h-10"
-				class:tab-active={option === selected}
-				on:click={() => (selected = option)}
-			>
-				{option}
-			</button>
-		{/each}
-	</div>
-	<div class="flex flex-col pt-4 items-center gap-2 h-screen w-screen">
-		{#if selected === 'Basic'}
-			<ImportantBasics />
-		{:else if selected === 'The Little Things & Socials'}
-			<LittleThings {badges} />
-		{:else if selected === 'Widgets'}
-			<WidgetEditor />
 		{/if}
-		<button
-			type="submit"
-			on:click={() => updateProfile()}
-			class="btn bg-[rgba(255,255,255,0.1)] max-w-xs w-32 shadow-lg shadow-[rgba(0,0,0,0.1)] backdrop-blur-lg border-2 border-solid border-[rgba(255,255,255,0.3)] my-4 rounded-md"
-			>Save</button
-		>
-		<footer class="flex flex-col justify-center items-center gap-2 p-4 bg-[rgba(0,0,0,0.2)] backdrop-blur-lg bg-opacity-80 rounded-lg">
+		<div role="tablist" class="tabs tabs-bordered h-16 lg:h-10 backdrop-blur-lg sticky top-0 z-50">
+			{#each options as option}
+				<button
+					role="tab"
+					aria-selected={option === selected}
+					class="tab tab-bordered text-white hover:text-white/50 text-xl font-bold bg-black bg-opacity-20 h-16 lg:h-10"
+					class:tab-active={option === selected}
+					on:click={() => (selected = option)}
+				>
+					{option}
+				</button>
+			{/each}
+		</div>
+		<div class="flex flex-col pt-4 items-center gap-2 h-screen w-screen">
+			{#if selected === 'Basic'}
+				<ImportantBasics />
+			{:else if selected === 'The Little Things & Socials'}
+				<LittleThings {badges} />
+			{:else if selected === 'Widgets'}
+				<WidgetEditor />
+			{/if}
+			<button
+				type="submit"
+				on:click={() => updateProfile()}
+				class="btn bg-[rgba(255,255,255,0.1)] max-w-xs w-32 shadow-lg shadow-[rgba(0,0,0,0.1)] backdrop-blur-lg border-2 border-solid border-[rgba(255,255,255,0.3)] my-4 rounded-md"
+				>Save</button
+			>
+			<footer
+				class="flex flex-col justify-center items-center gap-2 p-4 bg-[rgba(0,0,0,0.2)] backdrop-blur-lg bg-opacity-80 rounded-lg"
+			>
+				<p>Copyright © 2023 - {new Date().getFullYear()} - All Rights Reserved</p>
+				<p>
+					Made with ❤️ by <a class="link link-primary" href="https://only-my.space/nano">nano</a>
+				</p>
+				<p>
+					Join our <a class="link link-primary" href="https://discord.gg/SVsSQXf7HR">Discord</a>
+				</p>
+			</footer>
+		</div>
+	{:else}
+		<Loading />
+		<footer class="flex flex-col justify-center items-center gap-2 p-4">
 			<p>Copyright © 2023 - {new Date().getFullYear()} - All Rights Reserved</p>
 			<p>
 				Made with ❤️ by <a class="link link-primary" href="https://only-my.space/nano">nano</a>
@@ -94,19 +109,8 @@
 				Join our <a class="link link-primary" href="https://discord.gg/SVsSQXf7HR">Discord</a>
 			</p>
 		</footer>
-	</div>
-{:else}
-	<Loading />
-	<footer class="flex flex-col justify-center items-center gap-2 p-4">
-		<p>Copyright © 2023 - {new Date().getFullYear()} - All Rights Reserved</p>
-		<p>
-			Made with ❤️ by <a class="link link-primary" href="https://only-my.space/nano">nano</a>
-		</p>
-		<p>
-			Join our <a class="link link-primary" href="https://discord.gg/SVsSQXf7HR">Discord</a>
-		</p>
-	</footer>
-{/if}
+	{/if}
+</div>
 
 <style lang="postcss">
 	:global(body) {
@@ -115,8 +119,8 @@
 		--cp-input-color: #555;
 		--cp-button-hover-color: #777;
 	}
-	:global(body) {
-		@apply bg-gradient-to-r from-[#feac5e]/90 via-[#c77d90] to-[#4bc0c8]/80 bg-repeat m-0 p-0 overflow-x-hidden;
+	.wrapper {
+		@apply bg-gradient-to-r from-[#feac5e]/90 via-[#c77d90] to-[#4bc0c8]/80 bg-repeat m-0 p-0 overflow-x-hidden w-full h-screen;
 	}
 	:global(.grouped) {
 		@apply border-black border-4 border-opacity-10 bg-[rgba(0,0,0,0.1)] rounded-md max-w-xs w-full shadow-lg flex flex-col items-center justify-center p-2;
