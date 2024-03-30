@@ -1,7 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import * as jose from 'jose';
 import { prisma } from '$lib/server/db';
-import { exampleProfile } from '$lib';
 import { JWT_SECRET } from '$env/static/private';
 import type { LayoutServerLoad } from './$types';
 
@@ -38,28 +37,20 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
         return redirect(302, '/auth/login');
     }
     // If the user is authenticated query their profile in order to load their saved settings
-    const profile = await prisma.userProfile.findFirst({
+    const profile = await prisma.user.findFirst({
         where: {
-            user: {
-                email: payload.email
-            }
+            email: payload.email
         },
-        include: {
-            user: {
-                select: {
-                    badges: true
-                }
-            }
+        select: {
+            coins: true,
+            ownedEffects: true
         }
     })
-
-    if (!profile || !profile.profile) {
-        return {
-            profile: exampleProfile
-        }
+    if (!profile) {
+        return redirect(302, '/auth/login');
     }
     return {
-        profile: JSON.parse(profile.profile),
-        badges: profile.user.badges
+        coins: profile.coins,
+        ownedEffects: profile.ownedEffects
     }
 };

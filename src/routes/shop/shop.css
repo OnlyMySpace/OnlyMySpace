@@ -1,0 +1,15 @@
+:global(body) {
+    @apply bg-gradient-to-r from-[#feac5e]/90 via-[#c77d90] to-[#4bc0c8]/80 bg-repeat m-0 p-0 overflow-x-hidden w-full h-full lg:h-screen;
+}
+
+:global(main) {
+    @apply bg-gradient-to-r from-[#feac5e]/90 via-[#c77d90] to-[#4bc0c8]/80 bg-repeat m-0 p-0 overflow-x-hidden w-full h-full;
+}
+
+button{
+    @apply shadow-lg shadow-[rgba(0,0,0,0.1)] backdrop-blur-lg my-2 rounded-md border-2 border-solid border-[rgba(255,255,255,0.3)] hover:border-[rgba(255,255,255,0.5)];
+}
+
+.nodef:not(button) {
+    @apply btn bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)];
+}

@@ -1,5 +1,5 @@
 import { dev } from "$app/environment";
-import { SECRET_TURNSTILE_KEY } from "$env/static/private";
+import { SECRET_TURNSTILE_KEY, RESEND_API } from "$env/static/private";
 import { blacklistedRegexes } from "$lib/server/utils";
 import { prisma } from "$lib/server/db";
 import { Prisma } from "@prisma/client";
@@ -7,6 +7,8 @@ import { fail, type Actions } from "@sveltejs/kit";
 import bcrypt from 'bcrypt'
 import * as jose from "jose";
 import { validateToken } from "sveltekit-turnstile";
+import { Resend } from "resend";
+import { mailtext } from "$lib/server/mailtext";
 
 export const actions: Actions = {
     default: async ({ cookies, request }) => {
@@ -84,16 +86,51 @@ export const actions: Actions = {
             }           
         }
         const hashedPassword = await bcrypt.hash(password.toString(), 10)
+
         try {
-            await prisma.user.create({
+            let refby = cookies.get("refby") ?? "";
+            let user = await prisma.user.create({
                 data: {
                     email: email.toString(),
                     password: hashedPassword,
                     username: username_form.toString().trim(),
                     username_case_insensitive: username_form.toString().trim().toLowerCase(),
                     paidUser: false,
+                    refferedBy: refby
                 }
             })
+            const verificationCode = Math.random().toString(36).substring(2, 12) +  user.id // 10 char random string
+            await prisma.user.update({
+                where: {
+                    id: user.id
+                },
+                data: {
+                    verificationCode
+                }
+            })
+
+            let resend = new Resend(RESEND_API)
+            let mail = await resend.emails.send({
+                subject: 'Email verification code for OnlyMySpace',
+                from: 'OnlyMySpace <support@only-my.space>',
+                to: email.toString(),
+                html: mailtext.replaceAll('$[verificationCode]', verificationCode)
+            })
+
+            if (mail.error) {
+                if (dev) {
+                    return fail(500, {
+                        message: mail.error.message,
+                        success: false
+                    })
+                } else {
+                    return fail(500, {
+                        message: 'Could not send email. Please try again later.',
+                        success: false
+                    })
+                }
+            }
+
             const secret = new TextEncoder().encode(process.env.JWT_SECRET);
             const alg = 'HS256';
             const jwt = await new jose.SignJWT({ email: email.toString() }).setProtectedHeader({ alg }).setExpirationTime('4w').sign(secret);
