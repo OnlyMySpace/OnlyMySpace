@@ -62,6 +62,14 @@ export const actions: Actions = {
                 }
             }
         })
+        let pfpCheckFailed = profileData.pfp.url != "" && !profileData.pfp.url.startsWith('https://ik.imagekit.io/')
+        let bgCheckFailed = profileData.backgroundType == "image" && !profileData.background.startsWith('https://ik.imagekit.io/')
+        let socialIconFailed = profileData.socials.filter(s => s.icon.startsWith('/') && s.icon.endsWith('.svg')).length != profileData.socials.length
+        if (pfpCheckFailed || bgCheckFailed || socialIconFailed) {
+            return fail(400, {
+                message: "Please upload an image"
+            })
+        }
         if (profileimg) {
             profileData.pfp.url = await uploadFile(profileimg as File, profileData, 'profile', imgkit) + '?updatedAt=0'
         }
