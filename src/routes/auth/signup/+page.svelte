@@ -35,7 +35,7 @@
 		{/if}
 	</div>
 	<form
-		class="border-2 border-primary rounded-md flex flex-col justify-center items-center max-w-sm lg:w-1/5 md:w-2/3 sm:w-1/3 px-9"
+		class="bg-black/20 backdrop-blur-3xl border-2 border-slate-600 rounded-md flex flex-col justify-center items-center max-w-full lg:max-w-2/5 md:max-w-2/3 px-9 mx-1"
 		action=""
 		method="post"
 		use:enhance={({formData, cancel }) => {
@@ -58,24 +58,24 @@
 			type="text"
 			placeholder="Username"
 			name="username"
-			class="input w-full max-w-xs my-4 border-2 border-secondary"
+			class="input w-full max-w-xs my-4 border-2 border-slate-900"
 		/>
 		<input
 			type="email"
 			name="email"
 			placeholder="Email"
-			class="input w-full max-w-xs border-2 border-secondary mb-4"
+			class="input w-full max-w-xs border-2 border-slate-900 mb-4"
 			id="email"
 		/>
 		<input
 			type="password"
 			name="password"
 			placeholder="Password"
-			class="input w-full max-w-xs border-2 border-secondary"
+			class="input w-full max-w-xs border-2 border-slate-900"
 			id="password"
 		/>
 		<div class="flex flex-row justify-center items-center gap-3 my-4">
-			<input type="checkbox" class="checkbox checkbox-primary" name="tos" id="tos" />
+			<input type="checkbox" class="checkbox checkbox-ghost" name="tos" id="tos" />
 			<label for="tos"
 				>I agree to the <a href="/tos" class="link link-primary">Terms of Service</a></label
 			>
@@ -85,6 +85,16 @@
 				<Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} />
 			</div>
 		{/if}
-		<button type="submit" class="btn-primary btn my-4 rounded-md">Sign up</button>
+		<button type="submit" class="btn my-4 rounded-md">Sign up</button>
 	</form>
 </div>
+
+<style lang="postcss">
+	.btn {
+		@apply btn-ghost shadow-lg shadow-[rgba(0,0,0,0.1)] backdrop-blur-lg my-2 rounded-md border-2 border-solid border-[rgba(255,255,255,0.3)] hover:border-[rgba(255,255,255,0.5)] bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)];
+	}
+
+	input {
+		@apply bg-[rgba(0,0,0,0.1)] backdrop-blur-lg text-white placeholder:text-white/70 border-4 border-black border-opacity-10;
+	}
+</style>

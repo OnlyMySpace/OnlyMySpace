@@ -38,7 +38,7 @@
 		<div class="flex flex-col justify-center items-center w-full h-full lg:h-screen">
 			<h1 class="text-3xl font-bold text-center py-4">Something is being built here!</h1>
 			<p class="text-center">The shop isn't avaible yet. But heres a cat picture as compensation</p>
-			<img src="https://cataas.com/cat" class="w-fit h-fit rounded-lg m-4 border-solid border-2 border-pink-400 shadow-sm shadow-black" alt="" />
+			<img src="https://cataas.com/cat" class="w-fit max-w-md h-fit rounded-lg m-4 border-solid border-2 border-pink-400 shadow-sm shadow-black" alt="" />
 		</div>
 	{/if}
 </main>
