@@ -126,7 +126,7 @@
 			>!
 		</p>
 		{#if scrollY < 10}
-		<button out:fade={{ duration: 200 }} class="rounded-full w-16 h-16 fixed bottom-5" on:click={() => page2.scrollIntoView({behavior: 'smooth'})}>
+		<button aria-label="Scroll to next page" out:fade={{ duration: 200 }} class="rounded-full w-16 h-16 fixed bottom-5" on:click={() => page2.scrollIntoView({behavior: 'smooth'})}>
 			<svg class="w-16 h-16 fill-white hover:fill-white/30 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 		</button>
 		{/if}
@@ -149,9 +149,9 @@
 		</div>
 		<h2 class="text-2xl font-bold text-center py-4">So what are you waiting for?</h2>
 		<div class="flex flex-col w-11/12 md:w-2/3 lg:w-1/2 lg:flex-row pt-2 max-h-44 min-h-16">
-			<button class="btn grid flex-grow h-16 place-items-center text-white">Sign Up</button>
+			<button aria-label="Sign Up" class="btn grid flex-grow h-16 place-items-center text-white">Sign Up</button>
 			<div class="divider lg:divider-horizontal"></div>
-			<button class="btn grid flex-grow h-16 place-items-center text-white">Log In</button>
+			<button aria-label="Log In" class="btn grid flex-grow h-16 place-items-center text-white">Log In</button>
 		</div>
 	</div>
 </div>
