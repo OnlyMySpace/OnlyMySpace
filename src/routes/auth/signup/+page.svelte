@@ -22,7 +22,7 @@
 	Signup - OnlyMySpace
 </title>
 
-<div class="flex flex-col justify-center items-center h-screen w-screen">
+<div class="flex flex-col justify-center items-center min-h-screen w-screen bg-gradient-to-br from-slate-400 via-slate-500 to-slate-600 bg-repeat">
 	<div class="toast toast-top toast-end">
 		{#if msg !== undefined}
 			<div
@@ -38,12 +38,7 @@
 		class="border-2 border-primary rounded-md flex flex-col justify-center items-center max-w-sm lg:w-1/5 md:w-2/3 sm:w-1/3 px-9"
 		action=""
 		method="post"
-		use:enhance={({ formElement, formData, action, cancel, submitter }) => {
-			// `formElement` is this `<form>` element
-			// `formData` is its `FormData` object that's about to be submitted
-			// `action` is the URL to which the form is posted
-			// calling `cancel()` will prevent the submission
-			// `submitter` is the `HTMLElement` that caused the form to be submitted
+		use:enhance={({formData, cancel }) => {
 			if (formData.get('tos') !== 'on') {
 				msg = 'You must agree to the terms of service in order to sign up!';
 				cancel();
@@ -91,11 +86,5 @@
 			</div>
 		{/if}
 		<button type="submit" class="btn-primary btn my-4 rounded-md">Sign up</button>
-		<!-- <div class="divider divider-neutral w-10/12 self-center">OR</div>
-        <button on:click={() => discordAuth()} class="btn-primary btn my-4 rounded-md">
-        <img src="/socials/discord.svg" alt="Discord logo" class="w-6 h-6"/>
-        Sign up with Discord
-        </button>
-        -->
 	</form>
 </div>

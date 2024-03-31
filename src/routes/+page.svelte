@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser, dev } from '$app/environment';
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { fade, slide } from 'svelte/transition';
 
@@ -149,9 +150,9 @@
 		</div>
 		<h2 class="text-2xl font-bold text-center py-4">So what are you waiting for?</h2>
 		<div class="flex flex-col w-11/12 md:w-2/3 lg:w-1/2 lg:flex-row pt-2 max-h-44 min-h-16">
-			<button aria-label="Sign Up" class="btn grid flex-grow h-16 place-items-center text-white">Sign Up</button>
+			<button on:click={() => goto('/auth/signup')} aria-label="Sign Up" class="btn grid flex-grow h-16 place-items-center text-white">Sign Up</button>
 			<div class="divider lg:divider-horizontal"></div>
-			<button aria-label="Log In" class="btn grid flex-grow h-16 place-items-center text-white">Log In</button>
+			<button on:click={() => goto('/auth/login')} aria-label="Log In" class="btn grid flex-grow h-16 place-items-center text-white">Log In</button>
 		</div>
 	</div>
 </div>
