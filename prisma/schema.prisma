@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -18,23 +18,34 @@ enum Badges {
   ADMIN
 }
 
+enum Effect {
+  Hamster
+  Matrix
+  Heart
+}
+
 model User {
-  id Int @id @unique @default(autoincrement())
-  username String @unique
-  username_case_insensitive String @unique
-  password String
-  email String @unique
-  profile UserProfile?
-  paidUser Boolean
-  badges Badges[] @default([])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-  blacklisted Boolean @default(false)
+  id                        Int          @id @unique @default(autoincrement())
+  username                  String       @unique
+  username_case_insensitive String       @unique
+  password                  String
+  email                     String       @unique
+  profile                   UserProfile?
+  paidUser                  Boolean
+  badges                    Badges[]     @default([])
+  createdAt                 DateTime     @default(now())
+  updatedAt                 DateTime     @default(now()) @updatedAt
+  blacklisted               Boolean      @default(false)
+  coins                     Int          @default(0)
+  ownedEffects              Effect[]     @default([])
+  verifiedEmail             Boolean      @default(false)
+  verificationCode          String       @default("")
+  refferedBy                String       @default("")
 }
 
 model UserProfile {
-  id Int @id @unique @default(autoincrement())
-  user User @relation(fields: [id], references: [id])
+  id      Int    @id @unique @default(autoincrement())
+  user    User   @relation(fields: [id], references: [id])
   profile String @default("{}")
-  views Int @default(0)
+  views   Int    @default(0)
 }

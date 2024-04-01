@@ -22,7 +22,7 @@
 	Signup - OnlyMySpace
 </title>
 
-<div class="flex flex-col justify-center items-center h-screen w-screen">
+<div class="flex flex-col justify-center items-center min-h-screen w-screen bg-gradient-to-br from-slate-400 via-slate-500 to-slate-600 bg-repeat">
 	<div class="toast toast-top toast-end">
 		{#if msg !== undefined}
 			<div
@@ -35,15 +35,10 @@
 		{/if}
 	</div>
 	<form
-		class="border-2 border-primary rounded-md flex flex-col justify-center items-center max-w-sm lg:w-1/5 md:w-2/3 sm:w-1/3 px-9"
+		class="bg-black/20 backdrop-blur-3xl border-2 border-slate-600 rounded-md flex flex-col justify-center items-center max-w-full lg:max-w-2/5 md:max-w-2/3 px-9 mx-1"
 		action=""
 		method="post"
-		use:enhance={({ formElement, formData, action, cancel, submitter }) => {
-			// `formElement` is this `<form>` element
-			// `formData` is its `FormData` object that's about to be submitted
-			// `action` is the URL to which the form is posted
-			// calling `cancel()` will prevent the submission
-			// `submitter` is the `HTMLElement` that caused the form to be submitted
+		use:enhance={({formData, cancel }) => {
 			if (formData.get('tos') !== 'on') {
 				msg = 'You must agree to the terms of service in order to sign up!';
 				cancel();
@@ -63,24 +58,24 @@
 			type="text"
 			placeholder="Username"
 			name="username"
-			class="input w-full max-w-xs my-4 border-2 border-secondary"
+			class="input w-full max-w-xs my-4 border-2 border-slate-900"
 		/>
 		<input
 			type="email"
 			name="email"
 			placeholder="Email"
-			class="input w-full max-w-xs border-2 border-secondary mb-4"
+			class="input w-full max-w-xs border-2 border-slate-900 mb-4"
 			id="email"
 		/>
 		<input
 			type="password"
 			name="password"
 			placeholder="Password"
-			class="input w-full max-w-xs border-2 border-secondary"
+			class="input w-full max-w-xs border-2 border-slate-900"
 			id="password"
 		/>
 		<div class="flex flex-row justify-center items-center gap-3 my-4">
-			<input type="checkbox" class="checkbox checkbox-primary" name="tos" id="tos" />
+			<input type="checkbox" class="checkbox checkbox-ghost" name="tos" id="tos" />
 			<label for="tos"
 				>I agree to the <a href="/tos" class="link link-primary">Terms of Service</a></label
 			>
@@ -90,12 +85,16 @@
 				<Turnstile siteKey={PUBLIC_TURNSTILE_SITE_KEY} />
 			</div>
 		{/if}
-		<button type="submit" class="btn-primary btn my-4 rounded-md">Sign up</button>
-		<!-- <div class="divider divider-neutral w-10/12 self-center">OR</div>
-        <button on:click={() => discordAuth()} class="btn-primary btn my-4 rounded-md">
-        <img src="/socials/discord.svg" alt="Discord logo" class="w-6 h-6"/>
-        Sign up with Discord
-        </button>
-        -->
+		<button type="submit" class="btn my-4 rounded-md">Sign up</button>
 	</form>
 </div>
+
+<style lang="postcss">
+	.btn {
+		@apply btn-ghost shadow-lg shadow-[rgba(0,0,0,0.1)] backdrop-blur-lg my-2 rounded-md border-2 border-solid border-[rgba(255,255,255,0.3)] hover:border-[rgba(255,255,255,0.5)] bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)];
+	}
+
+	input {
+		@apply bg-[rgba(0,0,0,0.1)] backdrop-blur-lg text-white placeholder:text-white/70 border-4 border-black border-opacity-10;
+	}
+</style>
