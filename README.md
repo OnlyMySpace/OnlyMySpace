@@ -10,3 +10,39 @@
 <img src="https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7" alt="Netlify">
 </p>
 <h3 align="center">The readme is still WIP feel free to contribute</h3>
+
+## Installation
+
+Follow these steps to install and run the project:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/OnlyMySpace/OnlyMySpace.git
+```
+
+2. Navigate into the cloned repository:
+
+```bash
+cd OnlyMySpace
+```
+
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+Now, you should be able to see the application running at http://localhost:5173 (or whatever port you have configured).
+
+```bash
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
