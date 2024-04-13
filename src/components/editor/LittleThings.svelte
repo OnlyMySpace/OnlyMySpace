@@ -56,6 +56,10 @@
 		Reddit: {
 			type: 'url',
 			icon: '/socials/reddit.svg'
+		},
+		Github: {
+			type: 'url',
+			icon: '/socials/github.svg'
 		}
 	};
 </script>

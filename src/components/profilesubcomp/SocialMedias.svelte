@@ -13,6 +13,7 @@
         'tiktok': 'https://www.tiktok.com/@',
         'paypal': 'https://paypal.me/',
         'reddit': 'https://reddit.com/u/',
+        'github': 'https://github.com/'
     }
 
 	export let profile: UserProfile;

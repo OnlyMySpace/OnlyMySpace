@@ -109,25 +109,27 @@ export const actions: Actions = {
                 }
             })
 
-            let resend = new Resend(RESEND_API)
-            let mail = await resend.emails.send({
-                subject: 'Email verification code for OnlyMySpace',
-                from: 'OnlyMySpace <support@only-my.space>',
-                to: email.toString(),
-                html: mailtext.replaceAll('$[verificationCode]', verificationCode)
-            })
-
-            if (mail.error) {
-                if (dev) {
-                    return fail(500, {
-                        message: mail.error.message,
-                        success: false
-                    })
-                } else {
-                    return fail(500, {
-                        message: 'Could not send email. Please try again later.',
-                        success: false
-                    })
+            if (!dev) {
+                let resend = new Resend(RESEND_API)
+                let mail = await resend.emails.send({
+                    subject: 'Email verification code for OnlyMySpace',
+                    from: 'OnlyMySpace <support@only-my.space>',
+                    to: email.toString(),
+                    html: mailtext.replaceAll('$[verificationCode]', verificationCode)
+                })
+    
+                if (mail.error) {
+                    if (dev) {
+                        return fail(500, {
+                            message: mail.error.message,
+                            success: false
+                        })
+                    } else {
+                        return fail(500, {
+                            message: 'Could not send email. Please try again later.',
+                            success: false
+                        })
+                    }
                 }
             }
 
