@@ -60,6 +60,10 @@
 		Github: {
 			type: 'url',
 			icon: '/socials/github.svg'
+		},
+		Monkeytype: {
+			type: 'url',
+			icon: '/socials/monkeytype.svg'
 		}
 	};
 </script>

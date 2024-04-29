@@ -13,7 +13,8 @@
         'tiktok': 'https://www.tiktok.com/@',
         'paypal': 'https://paypal.me/',
         'reddit': 'https://reddit.com/u/',
-        'github': 'https://github.com/'
+        'github': 'https://github.com/',
+        'monkeytype': 'https://monkeytype.com/profile/'
     }
 
 	export let profile: UserProfile;
