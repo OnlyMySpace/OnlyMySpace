@@ -96,10 +96,6 @@
 			on:particlesLoaded={onParticlesLoaded}
 		/>
 	{/if}
-	
-	{#if currtime.getDay() === 1 && currtime.getMonth() === 3 }
-	<img src="https://ik.imagekit.io/onlymyspace/trollin.png?updatedAt=1710084461041" class="w-32 h-32 object-cover object-center top-3 rounded-full absolute -my-14" alt="">
-	{/if}
 	<img
 		style={`border-color: ${profile.pfp.border_color};`}
 		src={profile.pfp.url}
