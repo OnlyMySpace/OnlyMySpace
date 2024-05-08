@@ -97,7 +97,9 @@
 	$: {
 		if (canPlayMusic && musicSourceURL != '') {
 			setTimeout(async () => {
-				new Audio(await musicSourceURL).play();
+				let musicAudio = new Audio(await musicSourceURL)
+				musicAudio.loop = true;
+				musicAudio.play();
 			},(profile.music?.autoplayDelay || 0) * 1000)
 		}
 	}
