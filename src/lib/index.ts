@@ -30,7 +30,7 @@ export interface UserProfile {
     background: string;
     socials: Social[];
     bio: string;
-    widget: DynamicWidget | null; // @TODO: Deceprate this fully @FIXME: This is deprecated as nullable
+    widget: DynamicWidget | null; // @TODO: Deprecate this fully @FIXME: This is deprecated as nullable
     widgets: DynamicWidget[]; // not nullable because its an array
     pronnouns: string | null; // This is an optional field so there are no breaking changes
     rainbowTextColor: boolean | null;
@@ -49,7 +49,7 @@ export interface UserProfile {
         autoplay: boolean;
         autoplayDelay: number;
         autoplayClickMessage: string;
-    } | null // @NOTE: Non-depracated music player code
+    } | null // @NOTE: Non-depracted music player code
     /* @NOTE: For future me: From now on only add new fields if you know what you're doing and make it optional for backwards compatibility (its json not database you cant migrate it) */
 }
 
