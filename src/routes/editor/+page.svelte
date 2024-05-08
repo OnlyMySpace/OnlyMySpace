@@ -2,13 +2,13 @@
 	import Loading from '$components/Loading.svelte';
 	import ImportantBasics from '$components/editor/ImportantBasics.svelte';
 	import LittleThings from '$components/editor/LittleThings.svelte';
-	import WidgetEditor from '$components/editor/WidgetEditor.svelte';
+	import WidgetEditor from '$components/editor/WidgetAndMusic.svelte';
 	import { exampleProfile } from '$lib';
 	import { assetsStore, profileStore } from '$lib/stores';
 	import type { PageData } from './$types';
 	import { fly } from 'svelte/transition';
 
-	const options = ['Basic', 'The Little Things & Socials', 'Widgets'];
+	const options = ['Basic', 'The Little Things & Socials', 'Widgets & Music'];
 	let selected = options[0];
 	export let data: PageData;
 	if (!data.profile) profileStore.set(exampleProfile);
@@ -77,7 +77,7 @@
 				<ImportantBasics />
 			{:else if selected === 'The Little Things & Socials'}
 				<LittleThings {badges} />
-			{:else if selected === 'Widgets'}
+			{:else if selected === 'Widgets & Music'}
 				<WidgetEditor />
 			{/if}
 			<button

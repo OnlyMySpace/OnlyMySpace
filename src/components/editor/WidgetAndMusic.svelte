@@ -3,8 +3,10 @@
 	import { Widgets, type DynamicWidget } from '$lib/widgets';
 	import { profileStore } from '$lib/stores';
 	import { SvelteComponent, type ComponentType } from 'svelte';
+	import { onMount } from 'svelte';
+
 	let wmap = {
-		'Music Player': Widgets.Music,
+		// 'Music Player': Widgets.Music, @note: This is deprecated
 		Cube: Widgets.Cube,
 		'Current Time': Widgets.Time,
 		Quotes: Widgets.Quote,
@@ -13,13 +15,13 @@
 
 	async function renderWidget(name: string): Promise<ComponentType<SvelteComponent>> {
 		if (name == 'Music Player') {
-			return (await import('./WidgetSettings/MusicPlayer.svelte')).default;
+			return (await import('./WidgetSettings/MusicPlayer.svelte')).default; // @NOTE: This is deprecated
 		} else if (name == 'Current Time') {
 			return (await import('./WidgetSettings/Time.svelte')).default;
 		} else if (name == 'Quotes') {
 			return (await import('./WidgetSettings/Quotes.svelte')).default;
 		}
-		// unreachable
+		// Unreachable
 		return (await import('./WidgetSettings/None.svelte')).default;
 	}
 
@@ -39,9 +41,32 @@
 			widgetData: {}
 		};
 	}
+
+	onMount(() => {
+		if ($profileStore && $profileStore.music == null) {
+			$profileStore.music = {
+				songUrl: '',
+				autoplayClickMessage: 'Click me!',
+				autoplayDelay: 0
+			}
+		}
+	})
 </script>
 
 {#if $profileStore != null}
+	<div class="grouped">
+		<label for="musicsettings" class="text-white text-xl font-bold">Music Player</label>
+		<div id="musicsettings" class="w-full flex flex-col gap-2 max-w-xs">
+			{#if $profileStore.music}
+			<label class="label text-white text-lg font-bold" for="songurl">Youtube URL</label>
+			<input id="songurl" class="input w-full max-w-xs" placeholder="Youtube URL" bind:value={$profileStore.music.songUrl} type="text">
+			<label class="label text-white text-lg font-bold" for="autoclick">Autoplay click message</label>
+			<input id="autoclick" class="input w-full max-w-xs" placeholder="Click me!" bind:value={$profileStore.music.autoplayClickMessage} type="text">
+			<label class="label text-white text-lg font-bold" for="autodelay">Autoplay delay (seconds)</label>
+			<input id="autodelay" class="input w-full max-w-xs" min="0" placeholder="Autoplay delay (seconds)" bind:value={$profileStore.music.autoplayDelay} type="number">
+			{/if}
+		</div>
+	</div>
 	<div class="grouped">
 		<label class="label text-white text-xl font-bold" for="selectwidget">Widgets</label>
 		<select
