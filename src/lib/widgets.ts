@@ -1,9 +1,13 @@
 export enum Widgets {
-    Music = 'Music',
+    Music = 'Music', // @NOTE: This is deprecated
     Cube = 'Cube',
     Time = 'Time',
     Quote = 'Quote',
 }
+
+/**
+ * @deprecated Use the "music" property in the user profile
+ **/
 export type MusicWidgetData = {
     songName: string;
     songUrl: string;
@@ -11,9 +15,7 @@ export type MusicWidgetData = {
     songArtist: string;
 };
 
-export type CubeWidgetData = {
-    
-}
+export type CubeWidgetData = object;
 
 export type TimeWidgetData = {
     timezone: string;

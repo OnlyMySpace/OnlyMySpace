@@ -30,21 +30,30 @@ export interface UserProfile {
     background: string;
     socials: Social[];
     bio: string;
-    musicPlayer?: {
-        songName: string;
-        songUrl: string;
-        songCover: string;
-        songArtist: string;
-    } | null;
     widget: DynamicWidget | null; // @TODO: Deceprate this fully @FIXME: This is deprecated as nullable
     widgets: DynamicWidget[]; // not nullable because its an array
     pronnouns: string | null; // This is an optional field so there are no breaking changes
     rainbowTextColor: boolean | null;
     profileEffect: string | null;
+    musicPlayer?: {
+        songName: string;
+        songUrl: string;
+        songCover: string;
+        songArtist: string;
+    } | null; // @NOTE: Legacy music player type
+    music: {
+        songName: string;
+        songUrl: string;
+        songCover: string;
+        songArtist: string;
+        autoplay: boolean;
+        autoplayDelay: number;
+        autoplayClickMessage: string;
+    } | null // @NOTE: Non-depracated music player code
     /* @NOTE: For future me: From now on only add new fields if you know what you're doing and make it optional for backwards compatibility (its json not database you cant migrate it) */
 }
 
-export let exampleProfile: UserProfile = {
+export const exampleProfile: UserProfile = {
     backgroundType: 'color',
     background: '#000',
     bio: "Example BIO",
@@ -55,7 +64,6 @@ export let exampleProfile: UserProfile = {
         is_google_font: true
     },
     id: 0,
-    musicPlayer: null,
     pfp: {
         border_color: '#000',
         no_border: false,
@@ -68,5 +76,6 @@ export let exampleProfile: UserProfile = {
     rainbowTextColor: false,
     widget: null,
     widgets: [],
-    profileEffect: null
+    profileEffect: null,
+    music: null
 }
