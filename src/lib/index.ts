@@ -46,7 +46,6 @@ export interface UserProfile {
         songUrl: string;
         songCover: string;
         songArtist: string;
-        autoplay: boolean;
         autoplayDelay: number;
         autoplayClickMessage: string;
     } | null // @NOTE: Non-depracted music player code
