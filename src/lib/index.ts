@@ -44,7 +44,6 @@ export interface UserProfile {
     music: {
         songName: string;
         songUrl: string;
-        songCover: string;
         songArtist: string;
         autoplayDelay: number;
         autoplayClickMessage: string;
