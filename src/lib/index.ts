@@ -42,9 +42,7 @@ export interface UserProfile {
         songArtist: string;
     } | null; // @NOTE: Legacy music player type
     music: {
-        songName: string;
         songUrl: string;
-        songArtist: string;
         autoplayDelay: number;
         autoplayClickMessage: string;
     } | null // @NOTE: Non-depracted music player code
