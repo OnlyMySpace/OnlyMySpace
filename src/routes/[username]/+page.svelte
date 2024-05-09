@@ -33,7 +33,7 @@
 	 * @returns string
 	 */
 	async function prepareMusicData(music: UserProfile['music']): Promise<string> {
-		if (!music) {
+		if (!music || !music.songUrl || music.songUrl == '') {
 			return ''; // @NOTE: This being empty doesn't matter since if music is null the program won't even try to play music
 		}
 		const req = await fetch('/api/fetchYT', {
@@ -115,7 +115,7 @@
 </svelte:head>
 
 <div>
-	{#if profile.music != null && !canPlayMusic}
+	{#if profile.music != null && profile.music.songUrl != '' && !canPlayMusic}
 		<div class="w-full h-full backdrop-blur-lg z-10 absolute flex items-center justify-center">
 			<button
 				class="text-4xl font-bold"
