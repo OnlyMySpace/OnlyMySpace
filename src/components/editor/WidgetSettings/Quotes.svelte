@@ -3,9 +3,15 @@
 	import type { QuoteWidgetData } from '$lib/widgets';
 
 	let quotes = ($profileStore?.widget?.widgetData as QuoteWidgetData).quotes ?? [];
+	$: {
+		if ($profileStore && $profileStore.widget && $profileStore.widget.widgetData) {
+			// @ts-expect-error
+			$profileStore.widget.widgetData.quotes = quotes;
+		}
+	}
 </script>
 
-{#if $profileStore != null && $profileStore.widget != null}
+{#if $profileStore != null && $profileStore.widget != null && $profileStore.widget.widgetData != null}
 	<button
 		type="button"
 		class="btn-primary btn my-4 rounded-md"
