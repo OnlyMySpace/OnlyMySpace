@@ -38,7 +38,7 @@
 		let target = ev.target as HTMLSelectElement;
 		$profileStore.widget = {
 			type: wmap[target.value as keyof typeof wmap] as DynamicWidget['type'],
-			widgetData: 
+			widgetData: {}
 		};
 	}
 
