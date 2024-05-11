@@ -134,7 +134,7 @@
 			style={`font-family: ${profile.font.font_name}, ${profile.font.font_alt}; color: ${profile.textColor};${bgStyle}`}
 			class="flex items-center justify-center h-screen w-screen bg-no-repeat bg-center bg-cover"
 		>
-			{#if canPlayMusic || profile.music == null}
+			{#if canPlayMusic || profile.music == null || profile.music.songUrl == ''}
 				<div
 					transition:fade|in={{ duration: 600, delay: 400 }}
 					class="flex flex-col justify-center items-center gap-3 h-screen w-screen rounded-lg shadow-2xl backdrop-blur-sm lg:w-1/2 lg:h-fit lg:py-10"
