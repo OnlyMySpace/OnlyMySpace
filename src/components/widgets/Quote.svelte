@@ -2,7 +2,6 @@
 	import type { Quote } from "$lib/widgets";
 
     export let quotes: Quote[] = [];
-    quotes = quotes.sort((a, b) => Math.random() - 0.5); // Shuffle the quotes
 
     function typewriter(node: HTMLElement,{text = "",speed = 1}) {
         let i = 0;
@@ -15,10 +14,11 @@
             }
         }, speed * 100);
     }
+
+    let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
 </script>
 
-{#each quotes as quote}
-    <!--- Use the typewriter animation -->
-    <p class="text-3xl font-bold text-center transition-all duration-500" use:typewriter={{speed: 1, text: quote.text}}></p>
-    <p class="text-3xl font-bold text-center transition-all duration-500" use:typewriter={{speed: 10, text: quote.author}}></p>
-{/each}
+<!--- Use the typewriter animation -->
+<p class="text-3xl font-bold text-center transition-all duration-500" use:typewriter={{speed: 1, text: randomQuote.text}}></p>
+<p class="text-3xl font-bold text-center transition-all duration-500" use:typewriter={{speed: 10, text: randomQuote.author}}></p>
