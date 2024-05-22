@@ -41,7 +41,8 @@ model User {
   verifiedEmail             Boolean      @default(false)
   verificationCode          String       @default("")
   refferedBy                String       @default("")
-}
+  plusMember                Boolean      @default(false)
+  }
 
 model UserProfile {
   id      Int    @id @unique @default(autoincrement())
