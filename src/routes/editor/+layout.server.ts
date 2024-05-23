@@ -47,7 +47,8 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
         include: {
             user: {
                 select: {
-                    badges: true
+                    badges: true,
+                    plusMember: true,
                 }
             }
         }
@@ -60,6 +61,7 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
     }
     return {
         profile: JSON.parse(profile.profile),
-        badges: profile.user.badges
+        badges: profile.user.badges,
+        plus: profile.user.plusMember
     }
 };

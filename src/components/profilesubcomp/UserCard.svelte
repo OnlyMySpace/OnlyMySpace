@@ -53,6 +53,7 @@
 	};
 	export let profile: UserProfile;
 	export let badges: string[] = [];
+	export let plus = false;
 
 	let poll = false;
 
@@ -105,11 +106,12 @@
 	/>
 </div>
 <h1
-	class="text-5xl font-bold text-center sm:pb-4 tooltip"
+	class="text-5xl font-bold text-center sm:pb-4 tooltip flex justify-center items-center"
 	class:animate-rainbow={profile.rainbowTextColor}
 	data-tip={'ID ' + profile.id}
 >
-	{profile.uname}<span style="color: {profile.textColor}; opacity:0.65"
+	{profile.uname} {#if plus} <div data-tip="A verified Plus member!" class="tooltip text-4xl text-white from-[#ff0080]/30 to-[#e100ff]/70 bg-gradient-to-br rounded-full w-8 h-8 pl-1 pr-1 mx-3 text-center">+</div>{/if}
+	<span style="color: {profile.textColor}; opacity:0.65"
 		>{profile.pronnouns ? ' - ' + profile.pronnouns : ''}</span
 	>
 </h1>

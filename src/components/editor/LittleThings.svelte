@@ -3,6 +3,7 @@
 	import { profileStore } from '$lib/stores';
 	import ColorPicker from 'svelte-awesome-color-picker';
 	export let badges: string[] = [];
+	export let plus: boolean = false;
 
 	function handleSocialsChange(ev: Event, social: Social) {
 		if (!$profileStore || !ev.target) return;
@@ -120,7 +121,7 @@
 			<option class="text-black" disabled selected>Select an effect</option>
 			<option class="text-black" value="None">None</option>
 			<option class="text-black" value="Lava">Lava</option>
-			{#if badges.includes('DONATOR')}
+			{#if badges.includes('DONATOR') || plus}
 				<option value="Money">Money</option>
 			{/if}
 		</select>

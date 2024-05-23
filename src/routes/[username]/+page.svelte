@@ -139,7 +139,7 @@
 					transition:fade|in={{ duration: 600, delay: 400 }}
 					class="flex flex-col justify-center items-center gap-3 h-screen w-screen rounded-lg shadow-2xl backdrop-blur-sm lg:w-1/2 lg:h-fit lg:py-10"
 				>
-					<UserCard {profile} badges={data.badges} />
+					<UserCard {profile} badges={data.badges} plus={data.plus} />
 					<SocialMedias {profile} />
 					<p class="text-2xl font-bold text-center whitespace-pre-wrap">{profile.bio}</p>
 

@@ -15,7 +15,7 @@ export const actions: Actions = {
         }
         let jwt = (await veirfyJWT(cookie))
         if (!jwt.success || !jwt.payload || !jwt.payload.email) {
-            cookies.delete('jwt',{
+            cookies.delete('jwt', {
                 "path": "/"
             })
             return redirect(302, '/auth/login');
@@ -58,7 +58,7 @@ export const actions: Actions = {
             },
             select: {
                 user: {
-                    select: {badges: true}
+                    select: { badges: true, plusMember: true }
                 }
             }
         })
@@ -69,8 +69,8 @@ export const actions: Actions = {
             profileData.backgroundType = 'image'
             profileData.background = await uploadFile(bgimg as File, profileData, 'background', imgkit)
         }
-        let pfpCheckFailed = profileData.pfp.url != "" && !profileData.pfp.url.startsWith('https://ik.imagekit.io/')
-        let bgCheckFailed = profileData.backgroundType == "image" && !profileData.background.startsWith('https://ik.imagekit.io/')
+        const pfpCheckFailed = profileData.pfp.url != "" && !profileData.pfp.url.startsWith('https://ik.imagekit.io/')
+        const bgCheckFailed = profileData.backgroundType == "image" && !profileData.background.startsWith('https://ik.imagekit.io/')
         if (pfpCheckFailed || bgCheckFailed) {
             return fail(400, {
                 message: "Please upload an image"
@@ -89,7 +89,9 @@ export const actions: Actions = {
                 }
             })
         } else {
-            if (profileData.profileEffect?.toLowerCase() == "money" && !hasProfile.user.badges.includes("DONATOR")) {
+            if (profileData.profileEffect?.toLowerCase() == "money" && !(hasProfile.user.badges.includes("DONATOR") || hasProfile.user.plusMember)) {
+                console.log(hasProfile.user.plusMember)
+                console.log(profileData.profileEffect?.toLowerCase() == "money" && !(hasProfile.user.badges.includes("DONATOR") || hasProfile.user.plusMember))
                 return fail(400, {
                     message: "Bypassing the paywall isn't allowed. I'm sorry buddy"
                 })

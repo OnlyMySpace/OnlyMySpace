@@ -76,7 +76,7 @@
 			{#if selected === 'Basic'}
 				<ImportantBasics />
 			{:else if selected === 'The Little Things & Socials'}
-				<LittleThings {badges} />
+				<LittleThings {badges} plus={data.plus}/>
 			{:else if selected === 'Widgets & Music'}
 				<WidgetEditor />
 			{/if}

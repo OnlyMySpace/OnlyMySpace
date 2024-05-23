@@ -15,7 +15,8 @@ export const load: LayoutServerLoad = async (event) => {
             user: {
                 select: {
                     badges: true,
-                    blacklisted: true
+                    blacklisted: true,
+                    plusMember: true
                 }
             }
         }
@@ -30,6 +31,7 @@ export const load: LayoutServerLoad = async (event) => {
         profile: profile.profile,
         views: profile.views,
         badges: profile.user.badges,
-        blacklisted: profile.user.blacklisted
+        blacklisted: profile.user.blacklisted,
+        plus: profile.user.plusMember
     }
 }
