@@ -40,13 +40,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@egjs/infinitegrid": "^4.11.0",
 		"@prisma/client": "^5.10.2",
 		"@tsparticles/shape-emoji": "^3.3.0",
 		"@tsparticles/slim": "^3.3.0",
 		"@tsparticles/svelte": "^3.0.0",
-		"@types/bcrypt": "^5.0.2",
-		"@types/masonry-layout": "^4.2.7",
 		"bcrypt": "^5.1.1",
 		"imagekit": "^5.0.0",
 		"jose": "^5.2.2",
