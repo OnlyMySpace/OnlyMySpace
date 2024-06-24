@@ -19,7 +19,7 @@
 		"@types/eslint": "8.56.2",
 		"@types/glob": "^8.1.0",
 		"@typescript-eslint/eslint-plugin": "^7.0.0",
-		"@typescript-eslint/parser": "^6.21.0",
+		"@typescript-eslint/parser": "^7.13.1",
 		"autoprefixer": "^10.4.17",
 		"cheerio": "^1.0.0-rc.12",
 		"daisyui": "^4.6.2",
