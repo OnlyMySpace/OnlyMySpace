@@ -41,7 +41,7 @@
 	"type": "module",
 	"dependencies": {
 		"@egjs/infinitegrid": "^4.11.0",
-		"@prisma/client": "^5.10.2",
+		"@prisma/client": "^5.16.1",
 		"@tsparticles/shape-emoji": "^3.3.0",
 		"@tsparticles/slim": "^3.3.0",
 		"@tsparticles/svelte": "^3.0.0",
