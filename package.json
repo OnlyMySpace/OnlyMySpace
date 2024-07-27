@@ -42,7 +42,7 @@
 	"dependencies": {
 		"@distube/ytdl-core": "^4.13.5",
 		"@egjs/infinitegrid": "^4.11.0",
-		"@prisma/client": "^5.10.2",
+		"@prisma/client": "^5.17.0",
 		"@tsparticles/shape-emoji": "^3.3.0",
 		"@tsparticles/slim": "^3.3.0",
 		"@tsparticles/svelte": "^3.0.0",
