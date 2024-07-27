@@ -3,7 +3,7 @@ import { PUBLIC_IMGKIT } from "$env/static/public";
 import { type UserProfile } from "$lib";
 import { Widgets } from "$lib/widgets";
 import { prisma } from "$lib/server/db";
-import { veirfyJWT } from "$lib/server/utils";
+import { verifyJWT } from "$lib/server/utils";
 import { redirect, type Actions, fail } from "@sveltejs/kit";
 import ImageKit from "imagekit";
 
