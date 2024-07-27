@@ -1,4 +1,4 @@
-{
+	{
 	"name": "femprofiles",
 	"version": "0.0.1",
 	"private": true,
@@ -40,6 +40,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@distube/ytdl-core": "^4.13.5",
 		"@egjs/infinitegrid": "^4.11.0",
 		"@prisma/client": "^5.10.2",
 		"@tsparticles/shape-emoji": "^3.3.0",

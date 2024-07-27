@@ -1,6 +1,6 @@
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import ytdl from 'ytdl-core';
+import ytdl from '@distube/ytdl-core';
 
 export const POST: RequestHandler = async ({ request }) => {
     let body = await request.json()

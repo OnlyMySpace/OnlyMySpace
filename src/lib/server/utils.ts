@@ -17,7 +17,7 @@ export const limiter = new RateLimiter({
     }
   });
 
-export async function veirfyJWT(jwt: string): Promise<{success: boolean, payload: jose.JWTPayload | null}>  {
+export async function verifyJWT(jwt: string): Promise<{success: boolean, payload: jose.JWTPayload | null}>  {
     if (!jwt) {
         return {success: false, payload: null};
     }
