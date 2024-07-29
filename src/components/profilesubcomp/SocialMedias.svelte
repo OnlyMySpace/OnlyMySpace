@@ -20,7 +20,8 @@
         'steam': 'https://steamcommunity.com/id/',
         'kick': 'https://kick.com/',
         'roblox': 'https://www.roblox.com/search/users?keyword=', // please make better 
-        'monkeytype': 'https://monkeytype.com/profile/'
+        'monkeytype': 'https://monkeytype.com/profile/',
+        'threads': 'https://www.threads.net/@'
     }
 
 	export let profile: UserProfile;

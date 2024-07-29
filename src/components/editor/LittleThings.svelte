@@ -93,6 +93,10 @@
 		Monkeytype: {
 			type: 'url',
 			icon: '/socials/monkeytype.svg'
+		},
+		Threads: {
+			type: 'url',
+			icon: '/socials/threads.svg'
 		}
 	};
 </script>
