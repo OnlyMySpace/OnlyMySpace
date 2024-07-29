@@ -40,7 +40,7 @@
 		},
 		Youtube: {
 			type: 'url',
-			icon: '/socials/youtube.png'
+			icon: '/socials/youtube.svg'
 		},
 		Tiktok: {
 			type: 'url',
@@ -62,9 +62,41 @@
 			type: 'url',
 			icon: '/socials/github.svg'
 		},
+		Roblox: {
+			type: 'url',
+			icon: '/socials/roblox.svg'
+		},
+		Snapchat: {
+			type: 'handle',
+			icon: '/socials/snapchat.svg'
+		},
+		Soundcloud: {
+			type: 'url',
+			icon: '/socials/soundcloud.svg'
+		},
+		Twitch: {
+			type: 'url',
+			icon: '/socials/twitch.svg'
+		},
+		NameMC: {
+			type: 'url',
+			icon: '/socials/namemc.svg'
+		},
+		Steam: {
+			type: 'url',
+			icon: '/socials/steam.svg'
+		},
+		Kick: {
+			type: 'url',
+			icon: '/socials/kick.svg'
+		},
 		Monkeytype: {
 			type: 'url',
 			icon: '/socials/monkeytype.svg'
+		},
+		Threads: {
+			type: 'url',
+			icon: '/socials/threads.svg'
 		}
 	};
 </script>

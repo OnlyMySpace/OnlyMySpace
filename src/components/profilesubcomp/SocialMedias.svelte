@@ -14,7 +14,14 @@
         'paypal': 'https://paypal.me/',
         'reddit': 'https://reddit.com/u/',
         'github': 'https://github.com/',
-        'monkeytype': 'https://monkeytype.com/profile/'
+        'snapchat': 'https://www.snapchat.com/',
+        'soundcloud': 'https://soundcloud.com',
+        'namemc': 'https://namemc.com/search?q',
+        'steam': 'https://steamcommunity.com/id/',
+        'kick': 'https://kick.com/',
+        'roblox': 'https://www.roblox.com/search/users?keyword=', // please make better 
+        'monkeytype': 'https://monkeytype.com/profile/',
+        'threads': 'https://www.threads.net/@'
     }
 
 	export let profile: UserProfile;
