@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7" alt="Netlify">
 </p>
 <h3 align="center">🛠️ Not looking to host your own?</h3>
-<h3 align="center"><a href="https://only-my.space">Open OnlyMySpace</a> 🌌</h3>
+<h4 align="center"><a href="https://only-my.space">Open OnlyMySpace</a> </h4>
 
 ## Installation 🛠️
 
