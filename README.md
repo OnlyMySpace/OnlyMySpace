@@ -1,4 +1,4 @@
-<img src="https://cdn.discordapp.com/icons/1207700150592733234/fdbbc995a49e0c0472dcb001bee651cb.webp?size=512&format=webp&width=0&height=0" alt="OnlyMySpace Logo">
+<img src="https://cdn.discordapp.com/icons/1207700150592733234/fdbbc995a49e0c0472dcb001bee651cb.webp?size=512&format=webp&width=0&height=0" alt="OnlyMySpace Logo" style="text-align: center;" markdown="1">
 <h1 align="center"><a href="https://only-my.space">OnlyMySpace</a> 🌌</h1>
 <h2 align="center">Create your own space for free! 🚀</h2>
 <p align="center">
