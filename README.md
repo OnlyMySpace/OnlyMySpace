@@ -3,6 +3,7 @@
 </p>
 <h1 align="center"><a href="https://only-my.space">OnlyMySpace</a> 🌌</h1>
 <h2 align="center">Create your own space for free! 🚀</h2>
+<h3 align="center"></h3>
 <p align="center">
   <a href="https://github.com/OnlyMySpace/OnlyMySpace/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/onlymyspace/onlymyspace.svg" alt="GitHub license"></a>
   <a href="https://github.com/OnlyMySpace/OnlyMySpace/issues" target="_blank"><img src="https://img.shields.io/github/issues/onlymyspace/onlymyspace.svg" alt="GitHub issues"></a>
